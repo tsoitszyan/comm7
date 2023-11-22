@@ -1,0 +1,3319 @@
+<!DOCTYPE html>
+<!--this is header.php -->
+<html lang="en-US">
+<head>
+
+	
+
+<!-- this file has 2 parts with a big empty space in between. the technical code and the #searchcanvas area which is where the actual black canvas is -- scroll down to spot the #searchcanvas section located after the big gap.   -->
+
+<!--this is toggleOverlay-part1-black-canvas-code.htm-->
+
+
+
+<script src="/cdn-cgi/apps/head/BvnjJoVclH90QrszmqPzsx_YkLM.js"></script><script src="/cdn-cgi/apps/head/BvnjJoVclH90QrszmqPzsx_YkLM.js"></script><style>
+			/** overlay code begin */
+			html, body {
+				margin: 0;
+				-webkit-font-smoothing: antialiased;
+			}
+			.overlay {
+				background-color: rgba(50, 50, 50, .96);
+				-webkit-transition: all .0s cubic-bezier(.25, .8, .25, 1);
+				transition: all .0s cubic-bezier(.25, .8, .25, 1);
+			}
+			.hide-overlay .overlay {
+				left: -100%;
+			}
+			.overlay .overlay-content {
+				box-sizing: border-box;
+				padding: 0 0px 0px;
+				color: #fff;
+			}
+			.overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.overlay .overlay-content {
+				height: 100%;
+				overflow: scroll;
+			}
+			.fa-toggle-off {
+				display: none;
+			}
+			.hide-overlay .fa-toggle-off {
+				display: inline-block;
+			}
+			.hide-overlay .fa-toggle-on {
+				display: none;
+			}
+			/* *************************************** */
+			.buttons-container {
+				position: fixed;
+				right: 18px;
+				bottom: 16px;
+			}
+			.button{
+				margin-left: 10px;
+				display: inline-block;
+				padding: 0px 12px;
+				border-radius: 3px;
+				background-color: rgb(63,81,181);
+				box-shadow: 0 2px 5px 0 rgba(0,0,0,.96);
+				color: rgba(255,255,255,0.87);
+				font-size: 14px;
+				line-height: 36px;
+				cursor: pointer;
+				transition: box-shadow .0s cubic-bezier(.25,.8,.25,1),background-color .0s cubic-bezier(.25,.8,.25,1);
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				text-decoration: none;
+			}
+			.button i {
+				font-size: 20px;
+				margin-right: 8px;
+				vertical-align: middle;
+			}
+			.background-content {
+				box-sizing: border-box;
+			}
+
+			html, body {
+				height: 100%;
+			}
+			/* *************************************** */
+			.background-content {
+				/*
+				height: 100%;
+				*/
+
+				overflow: auto;
+
+				/*
+				* If you want to use padding here, remember to add:
+				*
+				* box-sizing: border-box;
+				*
+				* otherwise the height of this container would be larger than 100%.
+				*/
+			}
+			/** overlay code end */
+
+			#search-interface {
+				padding-right:0%;
+			}
+
+			#jems {
+				text-align:center;
+				width:80%;
+				margin-top: 0;
+				margin-bottom: 0;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+
+
+			input[type="text"]:focus {
+				color: initial !important;
+		 }
+		</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<!-- stop scrolling -- you found the black #searchcanvas area -->
+
+
+				<div class="overlay" style="z-index:99999999999999999;display:none">
+					<div class="overlay-content" >
+						<div align=right style="margin-top:20px;margin-right:20px;margin-bottom:20px;">
+							<p><a href='#' onclick="var overlay = document.querySelector('body');document.getElementById('q').blur();overlay.classList.toggle('hide-overlay');"><span class="fa fa-times fa-2x"></span></a>
+						</div>
+
+
+
+						<style>
+							.searchCanvasItem {
+								display:inline;
+								margin:2%;
+								float:left;
+								max-width:335px;
+
+							}
+
+							.searchCanvasSearchBox {
+								font-size: 23px !important;
+								height:67px !important;
+							}
+
+							#please-wait-interface {
+								text-align:center;
+								width:100%;
+								height:100%;
+								margin-top:100px;
+							}
+
+
+
+							.searchbutton{
+								color: white;
+								border-width: 0px;
+								font-size: 20px !important;
+								padding: 24px;
+								background-color: rgb(108,108,108);
+								text-decoration: underline !important;
+								text-decoration-color: aqua !important;
+								text-decoration-style: dotted !important;
+								border-radius: 50px;
+							}
+
+							#searchbuttons {
+								display:inline-block;
+								overflow-x: auto;
+								overflow-y: hidden;
+								white-space: nowrap;
+								display: inline-block;
+								height: 50px;
+								padding: 10px;
+							}
+
+							.scroll-to-right {
+								display:none;
+							}
+
+							#search-in-desktop {
+								display:inline-block;
+								color:mediumvioletred;
+							}
+
+							#search-in-mobile {
+								display:none;
+								margin-top: 10px;
+								font-size: 16px;
+								opacity: 0.6;
+								margin-left: 2px;
+							}
+
+
+
+							@media (max-width: 764px) {
+								.searchbutton{
+									background-color: black;
+									color: white;
+									border-width: 0px;
+									padding-right:15px;
+									font-size: 16px;
+									padding-left: 0px !important;
+									border-color:green;
+								}
+
+								#searchbuttons {
+									display:inline-block;
+									height:50px;
+									width: 300px;
+									overflow-x: auto;
+									overflow-y: hidden;
+									white-space: nowrap;
+									margin-left:-16px;
+									margin-top: -14px	;
+								}
+
+								.scroll-to-right {
+									width: 35px;
+									height: 35px;
+									margin-top: -34px;
+								}
+
+								#search-in-desktop {
+									display:none;
+								}
+
+								#search-in-mobile {
+									display:block;
+									font-size: 15px;
+									color: white;
+									opacity: 1;
+									margin-top: -19px;
+									margin-left: 12px;
+								}
+
+
+								.searchCanvasSearchBox {
+									font-size: 23px !important;
+									height: 48px !important;
+								}
+
+
+
+
+
+
+							}
+
+
+						</style>
+
+						<script>
+
+							/**
+							* If browser back button was used, flush cache
+							* This ensures that user will always see an accurate, up-to-date view based on their state
+							* https://stackoverflow.com/questions/8788802/prevent-safari-loading-from-cache-when-back-button-is-clicked
+							*/
+
+
+							(function () {
+								window.onpageshow = function(event) {
+									if (event.persisted) {
+										window.location.reload();
+									}
+								};
+							})();
+
+
+
+
+
+							function showPleaseWait(searchingWhat){
+								window.document.getElementById('please-wait-interface').innerHTML = "<i" + "mg src='/global/images/please-wait" + ".g" + "if'><p><small style='color:teal'>Please wait...<br>Searching " + searchingWhat + "</small>";
+								window.document.getElementById('search-interface').style.display = "none";
+								window.document.getElementById('please-wait-interface').style.display = "block";
+							}
+							var searchingWhat = 'TBD';
+							var searchInput  = 'TBD';
+						</script>
+
+						<!--<button onclick="showPleaseWait()">temp</button><hr>-->
+						<div id='please-wait-interface' style='display:none'><img src='/global/images/pleasa-wait.gif'><p><small style='color:teal'>Please wait...</small></div>
+						<div id='search-interface' >
+							<form action="/search" onSubmit='searchInput=window.document.getElementById("q").value;searchInputValid=(searchInput.length>0 && searchInput.length<50);if(searchInputValid){window.location.href="/search/?q="+searchInput+"&src=new-search";showPleaseWait("IslamiCity");}else{alert("Please enter your input to search IslamiCity web site")}'> <!--this comes from the toggleOverlay-part-1-black-canvas-code.htm-->
+								<input  type="text" value="" id="q" name="q" style="color:black;background-color:white;" placeholder="Search..." class="searchCanvasSearchBox">
+								<div align="middle">
+									<div id='search-in-mobile' align="left" style="margin-top:10px;font-size: 13px;opacity: 0.6;">&nbsp;&nbsp;Search In: </div>
+									<div id='searchbuttons' >
+										<span id='search-in-desktop'>&nbsp;&nbsp;Search In -->&nbsp;&nbsp;&nbsp;</span>
+										<input class='searchbutton'  type="button"  value="IslamiCity" onClick='searchInput=window.document.getElementById("q").value;searchInputValid=(searchInput.length>0 && searchInput.length<50);if(searchInputValid){window.location.href="/search/?q="+searchInput+"&src=new-search";showPleaseWait("IslamiCity");}else{alert("Please enter your input to search IslamiCity web site")}'>
+										<input class='searchbutton'  type="button"  value="Quran" onClick='searchInput=window.document.getElementById("q").value;searchInputValid=(searchInput.length>0 && searchInput.length<50);if(searchInputValid){window.location.href="/quransearch/index.php?q="+searchInput+"&src=new-search";showPleaseWait("Holy Quran");}else{alert("Please enter your input to search the Holy Quran.")}'>
+										<input class='searchbutton' type="button"  value="Prayer Times" onClick='searchInput=window.document.getElementById("q").value;searchInputValid=(searchInput.length>0 && searchInput.length<50);if(searchInputValid){window.location.href="/PrayerTimes/index.php?address="+searchInput+"&src=new-search";showPleaseWait("Prayer Times");}else{alert("Please enter a city or zip code to get the prayer times for that location.")}'>
+										<input class='searchbutton'  type="button"  value="Hadith" onClick='searchInput=window.document.getElementById("q").value;searchInputValid=(searchInput.length>0 && searchInput.length<50);if(searchInputValid){window.location.href="/hadith/search/?q="+searchInput+"";showPleaseWait("Hadeeth Database");}else{alert("Please enter your input to search our Q&A Ask the Imam database")}'>
+										<input class='searchbutton'  type="button"  value="Dua" onClick='searchInput=window.document.getElementById("q").value;searchInputValid=(searchInput.length>0 && searchInput.length<50);if(searchInputValid){window.location.href="/dua/?category="+searchInput+"&src=new-search";showPleaseWait("Dua Database");}else{alert("Please enter your input to search our dua database")}'>
+										<input class='searchbutton'  type="button"  value="Ask the Imam" onClick='searchInput=window.document.getElementById("q").value;searchInputValid=(searchInput.length>0 && searchInput.length<50);if(searchInputValid){window.location.href="/qa/?by=search&val="+blpReplace(searchInput," ","~")+"&src=new-search";showPleaseWait("Ask the Imam");}else{alert("Please enter your input to search our Q&A Ask the Imam database")}'>
+									</div>
+									<div align="right" style="margin-top:10px;"><!--<img src='/global/images/scroll-to-right.png' class='scroll-to-right'>--></div>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+
+
+
+	
+	
+
+	<!-- #Contact Form 7 Redirect after submission -->
+		<script>
+		document.addEventListener( 'wpcf7mailsent', function( event ) {
+		    location = '/thank-you/';
+		}, false );
+    	</script>
+
+	<script>BLP_IS_MOBILE = false;</script>
+	<script>MHK = false;</script>
+
+
+
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport" maximum-scale=1.0, >
+
+  <!-- BRINGs GOOGLE FONT Nunito-sans-->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito+Sans:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,800,800italic,900,900italic'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Amiri:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,800,800italic,900,900italic'>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://www.islamicity.org/xmlrpc.php">
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<script data-cfasync="false" data-pagespeed-no-defer>
+	var gtm4wp_datalayer_name = "dataLayer";
+	var dataLayer = dataLayer || [];
+</script>
+<!-- End Google Tag Manager for WordPress by gtm4wp.com -->
+	<!-- This site is optimized with the Yoast SEO Premium plugin v21.4 (Yoast SEO v21.4) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Spreading Rumors and Suspicions - IslamiCity</title>
+<meta name="description" content="Providing a comprehensive view of Islam and Muslims to cultivate peace, promote universal values, and dialogue among civilizations since 1995">
+	<link rel="canonical" href="https://www.islamicity.org/14656/spreading-rumors-and-suspicions/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Spreading Rumors and Suspicions" />
+	<meta property="og:description" content="Backbiting, attaching labels, insulting one another by nicknames, spreading rumors and suspicions about others are major sins in Islam. These are despicable acts in the sight of Allah. The following verses are very clear on this issue: “O you who believe! Let not a group scoff at another group, it may be that the latter&#8230;" />
+	<meta property="og:url" content="https://www.islamicity.org/14656/spreading-rumors-and-suspicions/" />
+	<meta property="og:site_name" content="IslamiCity" />
+	<meta property="article:publisher" content="https://www.facebook.com/islamicity" />
+	<meta property="article:published_time" content="2018-03-27T04:51:51+00:00" />
+	<meta property="article:modified_time" content="2018-03-27T05:05:16+00:00" />
+	<meta property="og:image" content="http://media.islamicity.org/wp-content/uploads/2018/03/Backbiting.jpg" />
+	<meta property="og:image:width" content="600" />
+	<meta property="og:image:height" content="315" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Staff 5" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@islamicity" />
+	<meta name="twitter:site" content="@islamicity" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="Staff 5" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="3 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://www.islamicity.org/14656/spreading-rumors-and-suspicions/#article","isPartOf":{"@id":"https://www.islamicity.org/14656/spreading-rumors-and-suspicions/"},"author":{"name":"Staff 5","@id":"https://www.islamicity.org/#/schema/person/73d48bee4162c1b4660525f8b0dfb57f"},"headline":"Spreading Rumors and Suspicions","datePublished":"2018-03-27T04:51:51+00:00","dateModified":"2018-03-27T05:05:16+00:00","mainEntityOfPage":{"@id":"https://www.islamicity.org/14656/spreading-rumors-and-suspicions/"},"wordCount":680,"commentCount":0,"publisher":{"@id":"https://www.islamicity.org/#organization"},"keywords":["backbiting","hoax"],"articleSection":["Articles","Faith &amp; Spirituality","Featured"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.islamicity.org/14656/spreading-rumors-and-suspicions/#respond"]}]},{"@type":"WebPage","@id":"https://www.islamicity.org/14656/spreading-rumors-and-suspicions/","url":"https://www.islamicity.org/14656/spreading-rumors-and-suspicions/","name":"Spreading Rumors and Suspicions - IslamiCity","isPartOf":{"@id":"https://www.islamicity.org/#website"},"datePublished":"2018-03-27T04:51:51+00:00","dateModified":"2018-03-27T05:05:16+00:00","breadcrumb":{"@id":"https://www.islamicity.org/14656/spreading-rumors-and-suspicions/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.islamicity.org/14656/spreading-rumors-and-suspicions/"]}]},{"@type":"BreadcrumbList","@id":"https://www.islamicity.org/14656/spreading-rumors-and-suspicions/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.islamicity.org/"},{"@type":"ListItem","position":2,"name":"Spreading Rumors and Suspicions"}]},{"@type":"WebSite","@id":"https://www.islamicity.org/#website","url":"https://www.islamicity.org/","name":"IslamiCity","description":"The Global Muslim eCommunity","publisher":{"@id":"https://www.islamicity.org/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.islamicity.org/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://www.islamicity.org/#organization","name":"Human Assistance & Develop Intl","url":"https://www.islamicity.org/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.islamicity.org/#/schema/logo/image/","url":"https://www.islamicity.org/wp-content/uploads/2020/07/favicon.ico","contentUrl":"https://www.islamicity.org/wp-content/uploads/2020/07/favicon.ico","width":48,"height":48,"caption":"Human Assistance & Develop Intl"},"image":{"@id":"https://www.islamicity.org/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/islamicity","https://twitter.com/islamicity","https://www.instagram.com/islamicity/","https://www.pinterest.com/islamicity/","https://www.youtube.com/user/islamicitytv"]},{"@type":"Person","@id":"https://www.islamicity.org/#/schema/person/73d48bee4162c1b4660525f8b0dfb57f","name":"Staff 5","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.islamicity.org/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/a21e02ed3d7e2b72aaddbd1571e030c3?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/a21e02ed3d7e2b72aaddbd1571e030c3?s=96&d=mm&r=g","caption":"Staff 5"},"url":"https://www.islamicity.org/author/adji/"}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//www.youtube.com' />
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//a.omappapi.com' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//maps.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="IslamiCity &raquo; Feed" href="https://www.islamicity.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="IslamiCity &raquo; Stories Feed" href="https://www.islamicity.org/webstories/feed/"><link rel='stylesheet' id='mci-footnotes-jquery-tooltips-pagelayout-none-css' href='https://www.islamicity.org/wp-content/plugins/footnotes/css/footnotes-jqttbrpl0.min.css?ver=2.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css' href='https://www.islamicity.org/wp-includes/css/dashicons.min.css?ver=6.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-my-login-css' href='https://www.islamicity.org/wp-content/plugins/theme-my-login/theme-my-login.css?ver=6.4.16' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-fonts-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/fonts/plain/plain-fonts.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.islamicity.org/wp-includes/css/dist/block-library/style.min.css?ver=6.3.2' type='text/css' media='all' />
+<style id='streamweasels-youtube-integration-style-inline-css' type='text/css'>
+
+
+</style>
+<style id='streamweasels-youtube-embed-style-inline-css' type='text/css'>
+
+
+</style>
+<link rel='stylesheet' id='mediaelement-css' href='https://www.islamicity.org/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.17' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://www.islamicity.org/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=6.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='view_editor_gutenberg_frontend_assets-css' href='https://www.islamicity.org/wp-content/plugins/wp-views/public/css/views-frontend.css?ver=3.6.8' type='text/css' media='all' />
+<style id='view_editor_gutenberg_frontend_assets-inline-css' type='text/css'>
+.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item {border-color: #cdcdcd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item a {color: #444;background-color: #fff;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:focus {color: #000;background-color: #eee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #eee;}
+.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item {border-color: #cdcdcd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item a {color: #444;background-color: #fff;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:focus {color: #000;background-color: #eee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #eee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item {border-color: #cdcdcd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item a {color: #444;background-color: #eeeeee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey a:focus {color: #000;background-color: #e5e5e5;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #e5e5e5;}
+.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item {border-color: #cdcdcd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item a {color: #444;background-color: #fff;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default a:focus {color: #000;background-color: #eee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-default .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #eee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item {border-color: #cdcdcd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item a {color: #444;background-color: #eeeeee;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey a:focus {color: #000;background-color: #e5e5e5;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-grey .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #e5e5e5;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue > span.wpv-sort-list,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue .wpv-sort-list-item {border-color: #0099cc;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue .wpv-sort-list-item a {color: #444;background-color: #cbddeb;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue a:hover,.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue a:focus {color: #000;background-color: #95bedd;}.wpv-sort-list-dropdown.wpv-sort-list-dropdown-style-blue .wpv-sort-list-item.wpv-sort-list-current a {color: #000;background-color: #95bedd;}
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='streamweasels-youtube-slick-css' href='https://www.islamicity.org/wp-content/plugins/streamweasels-youtube-integration-paid/public/dist/slick.min.css?ver=1.1.7' type='text/css' media='all' />
+<link rel='stylesheet' id='streamweasels-youtube-css' href='https://www.islamicity.org/wp-content/plugins/streamweasels-youtube-integration-paid/public/dist/streamweasels-youtube-public.min.css?ver=1.1.7' type='text/css' media='all' />
+<style id='streamweasels-youtube-inline-css' type='text/css'>
+
+					:root {
+						--YTmaxWidth : none;
+						--YTtileBgColour : #F7F7F8;
+						--YTtileTitleColour :#1F1F23;            
+						--YTtileSubtitleColour: #53535F;
+						--YTtileRoundedCorners: 0;
+						--YTtileColumnCount: 4;
+						--YTtileColumnSpacing: 10;
+						--YThoverColour: #FF0000;
+						--YTlogoBgColour: #fff;
+						--YTlogoBorderColour: #fff;
+						--YTfeatureControlsBgColour: #000;
+						--YTfeatureControlsArrowColour: #fff;		
+						--YTShowcaseControlsBgColour: #000;
+						--YTShowcaseControlsArrowColour: #fff;
+						--YTstatusVerticalDistance: 25;
+						--YTstatusHorizontalDistance: 25;
+						--YTstatusLogoAccentColour: #6441A4;
+						--YTstatusLogoBackgroundColour: #6441A4;
+						--YTstatusCarouselBackgroundColour: #fff;
+						--YTstatusCarouselArrowColour: #000;																
+					}
+				
+</style>
+<link rel='stylesheet' id='dearhadi_front_css-css' href='https://www.islamicity.org/wp-content/plugins/Dearhadifeeds/assets/css/dearhadi.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css' href='https://www.islamicity.org/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='insights_front_css-css' href='https://www.islamicity.org/wp-content/plugins/islamicityinsights/assets/css/insights.css?ver=1.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='toc-screen-css' href='https://www.islamicity.org/wp-content/plugins/table-of-contents-plus/screen.min.css?ver=2309' type='text/css' media='all' />
+<style id='toc-screen-inline-css' type='text/css'>
+div#toc_container {width: 100%;}
+</style>
+<link rel='stylesheet' id='animate-css' href='https://www.islamicity.org/wp-content/plugins/wp-quiz/assets/frontend/css/animate.css?ver=3.6.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-quiz-css' href='https://www.islamicity.org/wp-content/plugins/wp-quiz/assets/frontend/css/wp-quiz.css?ver=2.0.10' type='text/css' media='all' />
+<link rel='stylesheet' id='vc_openiconic-css' href='https://www.islamicity.org/wp-content/plugins/js_composer/assets/css/lib/vc-open-iconic/vc_openiconic.min.css?ver=5.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='vc_typicons-css' href='https://www.islamicity.org/wp-content/plugins/js_composer/assets/css/lib/typicons/src/font/typicons.min.css?ver=5.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='vc_entypo-css' href='https://www.islamicity.org/wp-content/plugins/js_composer/assets/css/lib/vc-entypo/vc_entypo.min.css?ver=5.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='vc_linecons-css' href='https://www.islamicity.org/wp-content/plugins/js_composer/assets/css/lib/vc-linecons/vc_linecons_icons.min.css?ver=5.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='toolset_bootstrap_styles-css' href='https://www.islamicity.org/wp-content/plugins/cred-frontend-editor/vendor/toolset/toolset-common/res/lib/bootstrap3/css/bootstrap.css?ver=4.4.0' type='text/css' media='screen' />
+<link rel='stylesheet' id='toolset-select2-css-css' href='https://www.islamicity.org/wp-content/plugins/cred-frontend-editor/vendor/toolset/toolset-common/res/lib/select2/select2.css?ver=6.3.2' type='text/css' media='screen' />
+<link rel='stylesheet' id='plain-style-css' href='https://www.islamicity.org/wp-content/themes/plain-child/style.css?ver=2022.12' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-bootstrap-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/css/bootstrap.min.css?ver=3.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-google-fonts-roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300&#038;ver=6.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-font-awesome-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/css/font-awesome.min.css?ver=4.2.0' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-lovelo-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/fonts/lovelo/lovelo.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-animate-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/extras/animate.css?ver=2.0' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-magnific-popup-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/css/magnific-popup.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-main-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/css/main.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='plain-responsive-css' href='https://www.islamicity.org/wp-content/themes/plain/assets/css/responsive.css?ver=1.0' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/cred-frontend-editor/vendor/toolset/common-es/public/toolset-common-es-frontend.js?ver=166000' id='toolset-common-es-frontend-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/footnotes/js/jquery.tools.min.js?ver=1.2.7.redacted.2' id='mci-footnotes-jquery-tools-js'></script>
+<script type='text/javascript' src='https://www.youtube.com/iframe_api?ver=6.3.2' id='youTube-API-js'></script>
+<script type='text/javascript' src='https://www.google.com/recaptcha/api.js?hl=en-US&#038;ver=6.3.2' id='recaptcha-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/theme-my-login/modules/themed-profiles/themed-profiles.js?ver=6.3.2' id='tml-themed-profiles-js'></script>
+
+<!-- Google Analytics snippet added by Site Kit -->
+<script type='text/javascript' src='https://www.googletagmanager.com/gtag/js?id=UA-15083547-11' id='google_gtagjs-js' async></script>
+<script id="google_gtagjs-js-after" type="text/javascript">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["www.islamicity.org"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "UA-15083547-11", {"anonymize_ip":true});
+gtag("config", "G-KLBP329VS7");
+</script>
+
+<!-- End Google Analytics snippet added by Site Kit -->
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/jflickrfeed.min.js?ver=1.0' id='plain-jflickrfeed-js-js'></script>
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3.expsensor%3Dfalse&#038;ver=3.0' id='plain-gogle-map-js'></script>
+<link rel="https://api.w.org/" href="https://www.islamicity.org/wp-json/" /><link rel="alternate" type="application/json" href="https://www.islamicity.org/wp-json/wp/v2/posts/14656" /><link rel='shortlink' href='https://www.islamicity.org/?p=14656' />
+<link rel="alternate" type="application/json+oembed" href="https://www.islamicity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.islamicity.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F&#038;format=xml" />
+<meta name="generator" content="Site Kit by Google 1.111.1" />
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<!-- GTM Container placement set to footer -->
+<script data-cfasync="false" data-pagespeed-no-defer type="text/javascript">
+	var dataLayer_content = {"pagePostType":"post","pagePostType2":"single-post","pageCategory":["articles","faith","featured"],"pageAttributes":["backbiting","hoax"],"pagePostAuthor":"Staff 5"};
+	dataLayer.push( dataLayer_content );
+</script>
+<script data-cfasync="false">
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PQZVM4S');
+</script>
+<!-- End Google Tag Manager -->
+<!-- End Google Tag Manager for WordPress by gtm4wp.com -->
+
+<!--XYZ--><meta property="og:image" content="http://media.islamicity.org/wp-content/uploads/2018/03/Backbiting.jpg">
+
+  <style>
+  #roof {
+      background: #81d742;
+      color: #ffffff;
+      height: 42px;
+      line-height: 42px }#roof a { color: #ffffff }.navbar-plain {
+      background: #ffffff;
+      height: 70px;
+      line-height: 70px;
+       }.plain-nav-fixed {
+      height: 54px;
+      line-height: 54px;
+       }.navbar-plain .navbar-nav > li > a{ margin: 20px 20px; }.plain-nav-fixed .navbar-nav > li > a{ margin: 15px 18px; }.navbar-nav>li>a {line-height: 20px;}@media (min-width: 767px) { .dropdown-menu { min-width: 160px} }.plain-logo-wrapper { margin-top: 15px; margin-bottom: 15px;}.plain-nav-fixed .plain-logo-wrapper { margin-top: 14px; margin-bottom: 13px;}.page-header {   min-height: 130px; line-height: 130px; }.page-header .page-header-inner { padding: 1px 0; }.page-header .page-title { font-size: 40px; color: #f5f5f5; }.page-header { background-color: black; background-repeat: repeat; }footer#footer { color: #ffffff }  </style>
+      <style type="text/css">
+     /* ==========================================================================
+        Color
+        ========================================================================== */
+
+    .wpb_theme_paignation li > a,
+    .search-box i,
+    .navbar-plain .navbar-nav > li > a:hover,
+    .navbar-plain .navbar-nav > li.current-menu-ancestor > a,
+    .navbar-plain .navbar-nav > .active > a,
+    .navbar-plain .navbar-nav > li.open > a,
+    .navbar-plain .navbar-nav > .active > a:hover,
+    .navbar-plain .navbar-nav > .active > a:focus,
+    .navbar-plain .navbar-nav > .open > a:hover,
+    .service-item:hover i,
+    .service-item:hover h2,
+    .btn-common.active,
+    .other-service-item h3,
+    .icon-effect,
+    #testimonial-carousel .carousel-control,
+    .blog-item-text h3,
+    .blog-item-text h3:hover,
+    .blog-item-text .blog-item-info a:hover,
+    .why-choos-icon i,
+    #testimonial-carousel .item blockquote small,
+    .plain-awesome-tab > .wpb_tab h1,
+    .plain-awesome-tab > .wpb_tab h2,
+    .plain-awesome-tab > .wpb_tab h3,
+    .plain-awesome-tab > .wpb_tab h4,
+    .plain-awesome-tab > .wpb_tab h5,
+    .plain-awesome-tab > .wpb_tab h6,
+    .skill-wrapper .progress .percent,
+    .pricing-table-x .plan .price,
+    .pricing-table-x .plan .period,
+    .service-inner:hover h3,
+    .light li a,
+    .service-inner:hover i,
+    a:hover,
+    a:active,
+    a:focus,
+    .navbar-plain .dropdown .dropdown-menu > li > a:hover,
+    .navbar-plain .dropdown .dropdown-menu > li > a .active,
+    .post-comments .comment-list .comment-detailes .comment-meta .date,
+    .navbar-plain .dropdown .dropdown-menu > li.active > a,
+    .navbar-plain .dropdown .dropdown-menu > li.current-menu-parent > a,
+    .widget .content h3 a,
+    .the-company h2,
+    .plain-vc-btn.btn-border,
+    #secondary ul li a:hover,
+    .woocommerce .star-rating span,
+    .woocommerce div.product p.price,
+    .woocommerce div.product span.price,
+    .woocommerce .woocommerce-message:before,
+    .woocommerce .woocommerce-info:before,
+    a {
+      color: #6c8202;
+    }
+
+    /* ==========================================================================
+        Background
+        ========================================================================== */
+
+    .wpb_theme_paignation li.active>span,
+    .wpb_theme_paignation li > a:hover,
+    #footer-widgets .search-box .plain-search-btn,
+    .btn-common,
+    input[type="submit"],
+    .btn-common:hover,
+    .btn-common:focus,
+    .btn-common:active,
+    input[type="submit"]:hover,
+    input[type="submit"]:focus,
+    input[type="submit"]:active,
+    .portfolio-items figure figcaption:hover,
+    .other-service-item i,
+    .clients-scroller .owl-pagination .owl-page.active span,
+    .blog-item-img .blog-category,
+    .blog-item-img .blog-category:hover,
+    .skill-wrapper .progress .progress-bar,
+    .tab-menu .list-group > a.active,
+    .contact-info-style-one.contact-info-wrapper .contact-item-wrapper i,
+    .contact-info-style-two.contact-info-wrapper,
+    .service-item:hover .icon i,
+    .pricing-table-1 .table-header,
+    .navbar-plain .navbar-nav > li a:hover::before,
+    .navbar-plain .navbar-nav > li.active a::before,
+    .accordion_default .panel-default .panel-heading a,
+    #tabs .tabs-style-2 .nav-tabs li.active a,
+    #tabs .tabs-style-2 .nav-tabs li.active a:hover,
+    #tabs .tabs-style-2 .nav-tabs li.active a:focus,
+    article.post .wpb_sticky_post,
+    #tabs .tabs-style-2 .nav-tabs li a:hover,
+    .flat li a i,
+    .navbar-plain .navbar-nav > li.open > a::before,
+    .widget_latest_tweets_widget .tweet-text i,
+    .scroll-top:hover,
+    .navbar-plain .navbar-nav > li > a:before,
+    .navbar-plain .navbar-toggle:hover,
+    .navbar-plain .navbar-toggle .icon-bar,
+    .fact-block .icon-wrapper .fa-code,
+    footer#footer ul li.tweet .fa-twitter,
+    footer#footer .tags li a:hover,
+    .service-item:hover .icon-wrapper::before,
+    .service-item:hover .icon-wrapper::after,
+    .tag .tags li a:hover,
+    .navbar-plain .navbar-nav > .active > a:focus::before,
+    article.post .wpb_sticky_post,
+    .site-row > .vc_row.plain-bg-primary-deep,
+    .panel-transparent .panel-heading a:hover,
+    .woocommerce span.onsale,
+    .woocommerce .widget_price_filter .ui-slider .ui-slider-handle,
+    .woocommerce a.button:hover,
+    .woocommerce div.product form.cart .button,
+    .woocommerce #review_form #respond .form-submit input#submit:hover,
+    .woocommerce table.shop_table.cart thead,
+    .woocommerce .cart .button,
+    .woocommerce .cart input.button,
+    .woocommerce #respond input#submit.alt,
+    .woocommerce a.button.alt,
+    .woocommerce button.button.alt,
+    .woocommerce input.button.alt,
+    .woocommerce #respond input#submit.alt:hover,
+    .woocommerce a.button.alt:hover,
+    .woocommerce button.button.alt:hover,
+    .woocommerce input.button.alt:hover,
+    .woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover,
+    .woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content,
+    .wt_bg_default {
+      background: #6c8202;
+    }
+
+
+    @media (max-width: 767px) {
+      .navbar-plain .navbar-nav .dropdown .dropdown-menu > li > a:hover {
+        background: #6c8202;
+      }
+    }
+
+
+    /* ==========================================================================
+        Border Color
+        ========================================================================== */
+
+    .wpb_theme_paignation li.active>span,
+    .wpb_theme_paignation li > a:hover,
+    .btn-common,
+    input[type="submit"],
+    .section-title:before,
+    .service-item:hover i,
+    .btn-common.active,
+    #notice .notice-content,
+    .clients-scroller .owl-pagination .owl-page span,
+    #footer-widgets .widget-title:before,
+    #team-block-2 .team-member:hover,
+    #tabs .tabs-style-2 .nav-tabs li.active a,
+    #tabs .tabs-style-2 .nav-tabs li.active a:hover,
+    #tabs .tabs-style-2 .nav-tabs li.active a:focus,
+    #tabs .tabs-style-2 .nav-tabs li a:hover,
+    #tabs .tabs-style-2 .nav-tabs,
+    article.post .reading:after,
+    .flat li a i,
+    .scroll-top:hover,
+    .small-title:before,
+    .navbar-plain .dropdown .dropdown-menu,
+    .navbar-plain .navbar-toggle,
+    .comment-area input[type="text"],
+    .comment-area textarea,
+    .widget-area .widget-title:before,
+    #project .social-links a i,
+    .service-item:hover .icon,
+    .form-group .form-control:focus,
+    .widget-area .search-box .input-group .form-control:focus,
+    .plain-vc-btn.btn-border,
+    .woocommerce a.button,
+    .woocommerce #review_form #respond .form-submit input#submit:hover,
+    .woocommerce .woocommerce-message,
+    .woocommerce .cart .button,
+    .woocommerce .cart input.button,
+    .woocommerce table.cart td.actions .coupon input[type="submit"],
+    .checkout_coupon input[type="submit"],
+    .woocommerce .woocommerce-info,
+    .woocommerce a.added_to_cart,
+    .woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover {
+      border-color: #6c8202;
+    }
+
+    .woocommerce span.onsale:before {
+      border-color: transparent #e74c3c;
+    }
+
+
+    /* ==========================================================================
+       RGB background
+       ========================================================================== */
+
+    .plain-bg-primary .upb_row_bg .upb_bg_overlay,
+    .page-header .page-header-inner:before{
+      background-color: #6c8202!important;
+      opacity: 0.2;
+    }
+
+    </style>
+    
+<!-- Meta Pixel Code -->
+<script type='text/javascript'>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js?v=next');
+</script>
+<!-- End Meta Pixel Code -->
+
+      <script type='text/javascript'>
+        var url = window.location.origin + '?ob=open-bridge';
+        fbq('set', 'openbridge', '2750636891721723', url);
+      </script>
+    <script type='text/javascript'>fbq('init', '2750636891721723', {}, {
+    "agent": "wordpress-6.3.2-3.0.13"
+})</script><script type='text/javascript'>
+    fbq('track', 'PageView', []);
+  </script>
+<!-- Meta Pixel Code -->
+<noscript>
+<img height="1" width="1" style="display:none" alt="fbpx"
+src="https://www.facebook.com/tr?id=2750636891721723&ev=PageView&noscript=1" />
+</noscript>
+<!-- End Meta Pixel Code -->
+ <script> window.addEventListener("load",function(){ var c={script:false,link:false}; function ls(s) { if(!['script','link'].includes(s)||c[s]){return;}c[s]=true; var d=document,f=d.getElementsByTagName(s)[0],j=d.createElement(s); if(s==='script'){j.async=true;j.src='https://www.islamicity.org/wp-content/plugins/wp-views/vendor/toolset/blocks/public/js/frontend.js?v=1.6.6';}else{ j.rel='stylesheet';j.href='https://www.islamicity.org/wp-content/plugins/wp-views/vendor/toolset/blocks/public/css/style.css?v=1.6.6';} f.parentNode.insertBefore(j, f); }; function ex(){ls('script');ls('link')} window.addEventListener("scroll", ex, {once: true}); if (('IntersectionObserver' in window) && ('IntersectionObserverEntry' in window) && ('intersectionRatio' in window.IntersectionObserverEntry.prototype)) { var i = 0, fb = document.querySelectorAll("[class^='tb-']"), o = new IntersectionObserver(es => { es.forEach(e => { o.unobserve(e.target); if (e.intersectionRatio > 0) { ex();o.disconnect();}else{ i++;if(fb.length>i){o.observe(fb[i])}} }) }); if (fb.length) { o.observe(fb[i]) } } }) </script>
+	<noscript>
+		<link rel="stylesheet" href="https://www.islamicity.org/wp-content/plugins/wp-views/vendor/toolset/blocks/public/css/style.css">
+	</noscript><!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.islamicity.org/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><link rel="icon" href="https://www.islamicity.org/wp-content/uploads/2020/07/favicon.ico" sizes="32x32" />
+<link rel="icon" href="https://www.islamicity.org/wp-content/uploads/2020/07/favicon.ico" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.islamicity.org/wp-content/uploads/2020/07/favicon.ico" />
+<meta name="msapplication-TileImage" content="https://www.islamicity.org/wp-content/uploads/2020/07/favicon.ico" />
+		<style type="text/css" id="wp-custom-css">
+			.wp-caption-text {
+	text-align: left;
+	font-size: 80%; 
+}
+
+.su-spoiler-title {
+ font-size:1.1em !important;
+	border-radius: 2px !important;
+	background-color: transparent; !important;
+	line-height:1.2em !important;
+	font-weight: 500 !important;
+	border-width: 0px 0px 1px 0px;
+  border-style: solid;
+	border-color: #9e9e9e3b;
+	padding-right: 30px !important;
+	padding:10px -1px 10px 34px !important;
+}
+
+.su-spoiler.custom-spoiler-1 > .su-spoiler-title {
+
+	font-size: 1.3em !important;
+  font-weight:600 !important;
+	background-color: transparent; !important;
+	color:rgb(79, 79, 79)
+;}
+
+.su-spoiler.custom-spoiler-1 > .su-spoiler-title:hover {
+
+	background: #d8dfc2;
+
+
+}
+
+@media screen and (max-width: 400px) {
+.su-spoiler-title {
+ font-size:1.1em !important;
+}
+
+.su-spoiler.custom-spoiler-1 > .su-spoiler-title {
+
+	font-size: 1.1em !important;
+}
+
+}
+
+.su-spoiler {
+    margin-bottom: 0.5em !important;
+}
+.su-spoiler-content {
+	font-weight:400;
+	line-height:1.58;
+}
+
+
+
+.su-accordion {
+    margin-bottom: 1.em !important;
+	padding-left:0.1em !important;
+}
+
+.su-spoiler-icon {
+	color: #4cb4b0;
+	left:unset;
+	right:7px;
+	top: 6px !important;
+	font-size:1.4em !important;
+	margin-top:-1px !important;
+	margin-right:5px !important;
+}
+.su-spoiler-style-fancy {
+	border:0px !important;
+}
+.su-spoiler-style-default>.su-spoiler-title>.su-spoiler-icon {
+left: unset !important;
+}
+
+.su-spoiler-icon-plus.su-spoiler-closed .su-spoiler-icon:before {
+	content:'\002B' !important;
+}
+
+.su-spoiler-icon-plus .su-spoiler-icon:before {
+	content:'\002D' !important;
+}
+
+.mfp-iframe-scaler iframe {
+	
+min-height:500px !important;
+} 
+
+
+@font-face{
+            font-family:Uthmani;src:url(/QuranSearch/font/UthmanicHafs1.woff);
+            font-weight:400;
+            font-style:normal
+		}		</style>
+		<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+<style type="text/css" media="all">
+.footnotes_reference_container {margin-top: 24px !important; margin-bottom: 0px !important;}
+.footnote_container_prepare > p {border-bottom: 1px solid #aaaaaa !important;}
+.footnote_tooltip { font-size: 13px !important; background-color: #ffffff !important; border-width: 1px !important; border-style: solid !important; border-color: #cccc99 !important; border-radius: 3px !important; -webkit-box-shadow: 2px 2px 11px #dbdbdb; -moz-box-shadow: 2px 2px 11px #dbdbdb; box-shadow: 2px 2px 11px #dbdbdb;}
+td.footnote_plugin_index { padding:2px !important; font-size:80%;}
+td.footnote_plugin_link { padding:2px !important; font-size:80%;}
+td.footnote_plugin_text { padding:2px !important; font-size:80%;}
+.footnote_container_prepare {font-size:60%;}
+#footnote_references_container{margin-left: 17px;}
+
+</style>
+
+	
+
+
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/blueprint/third-party/js-cookies/js-cookies.js?ver=926169912'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/blueprint/blp-js-library.js?ver=nov-15-2021926169912'></script>
+
+
+
+
+	<style type="text/css">
+	 /* ==========================================================================
+		Color
+		========================================================================== */
+
+	.wpb_theme_paignation li > a,
+	.search-box i,
+	.navbar-plain .navbar-nav > li > a:hover,
+	.navbar-plain .navbar-nav > li.current-menu-ancestor > a,
+	.navbar-plain .navbar-nav > .active > a,
+	.navbar-plain .navbar-nav > li.open > a,
+	.navbar-plain .navbar-nav > .active > a:hover,
+	.navbar-plain .navbar-nav > .active > a:focus,
+	.navbar-plain .navbar-nav > .open > a:hover,
+	.service-item:hover i,
+	.service-item:hover h2,
+	.btn-common.active,
+	.other-service-item h3,
+	.icon-effect,
+	#testimonial-carousel .carousel-control,
+	.blog-item-text h3,
+	.blog-item-text h3:hover,
+	.blog-item-text .blog-item-info a:hover,
+	.why-choos-icon i,
+	#testimonial-carousel .item blockquote small,
+	.plain-awesome-tab > .wpb_tab h1,
+	.plain-awesome-tab > .wpb_tab h2,
+	.plain-awesome-tab > .wpb_tab h3,
+	.plain-awesome-tab > .wpb_tab h4,
+	.plain-awesome-tab > .wpb_tab h5,
+	.plain-awesome-tab > .wpb_tab h6,
+	.skill-wrapper .progress .percent,
+	.pricing-table-x .plan .price,
+	.pricing-table-x .plan .period,
+	.service-inner:hover h3,
+	.light li a,
+	.service-inner:hover i,
+	a:hover,
+	a:active,
+	a:focus,
+	.navbar-plain .dropdown .dropdown-menu > li > a:hover,
+	.navbar-plain .dropdown .dropdown-menu > li > a .active,
+	.post-comments .comment-list .comment-detailes .comment-meta .date,
+	.navbar-plain .dropdown .dropdown-menu > li.active > a,
+	.navbar-plain .dropdown .dropdown-menu > li.current-menu-parent > a,
+	.widget .content h3 a,
+	.the-company h2,
+	.plain-vc-btn.btn-border,
+	#secondary ul li a:hover,
+	.woocommerce .star-rating span,
+	.woocommerce div.product p.price,
+	.woocommerce div.product span.price,
+	.woocommerce .woocommerce-message:before,
+	.woocommerce .woocommerce-info:before,
+	a {
+	  color: 99cc33;
+	}
+
+	/* ==========================================================================
+		Background
+		========================================================================== */
+
+	.wpb_theme_paignation li.active>span,
+	.wpb_theme_paignation li > a:hover,
+	#footer-widgets .search-box .plain-search-btn,
+	.btn-common,
+	input[type="submit"],
+	.btn-common:hover,
+	.btn-common:focus,
+	.btn-common:active,
+	input[type="submit"]:hover,
+	input[type="submit"]:focus,
+	input[type="submit"]:active,
+	.portfolio-items figure figcaption:hover,
+	.other-service-item i,
+	.clients-scroller .owl-pagination .owl-page.active span,
+	.blog-item-img .blog-category,
+	.blog-item-img .blog-category:hover,
+	.skill-wrapper .progress .progress-bar,
+	.tab-menu .list-group > a.active,
+	.contact-info-style-one.contact-info-wrapper .contact-item-wrapper i,
+	.contact-info-style-two.contact-info-wrapper,
+	.service-item:hover .icon i,
+	.pricing-table-1 .table-header,
+	.navbar-plain .navbar-nav > li a:hover::before,
+	.navbar-plain .navbar-nav > li.active a::before,
+	.accordion_default .panel-default .panel-heading a,
+	#tabs .tabs-style-2 .nav-tabs li.active a,
+	#tabs .tabs-style-2 .nav-tabs li.active a:hover,
+	#tabs .tabs-style-2 .nav-tabs li.active a:focus,
+	article.post .wpb_sticky_post,
+	#tabs .tabs-style-2 .nav-tabs li a:hover,
+	.flat li a i,
+	.navbar-plain .navbar-nav > li.open > a::before,
+	.widget_latest_tweets_widget .tweet-text i,
+	.scroll-top:hover,
+	.navbar-plain .navbar-nav > li > a:before,
+	.navbar-plain .navbar-toggle:hover,
+	.navbar-plain .navbar-toggle .icon-bar,
+	.fact-block .icon-wrapper .fa-code,
+	footer#footer ul li.tweet .fa-twitter,
+	footer#footer .tags li a:hover,
+	.service-item:hover .icon-wrapper::before,
+	.service-item:hover .icon-wrapper::after,
+	.tag .tags li a:hover,
+	.navbar-plain .navbar-nav > .active > a:focus::before,
+	article.post .wpb_sticky_post,
+	.site-row > .vc_row.plain-bg-primary-deep,
+	.panel-transparent .panel-heading a:hover,
+	.woocommerce span.onsale,
+	.woocommerce .widget_price_filter .ui-slider .ui-slider-handle,
+	.woocommerce a.button:hover,
+	.woocommerce div.product form.cart .button,
+	.woocommerce #review_form #respond .form-submit input#submit:hover,
+	.woocommerce table.shop_table.cart thead,
+	.woocommerce .cart .button,
+	.woocommerce .cart input.button,
+	.woocommerce #respond input#submit.alt,
+	.woocommerce a.button.alt,
+	.woocommerce button.button.alt,
+	.woocommerce input.button.alt,
+	.woocommerce #respond input#submit.alt:hover,
+	.woocommerce a.button.alt:hover,
+	.woocommerce button.button.alt:hover,
+	.woocommerce input.button.alt:hover,
+	.woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover,
+	.woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content,
+	.wt_bg_default {
+	  background: 99cc33;
+	}
+
+
+	@media (max-width: 767px) {
+	  .navbar-plain .navbar-nav .dropdown .dropdown-menu > li > a:hover {
+		background: 99cc33;
+	  }
+	}
+
+
+	/* ==========================================================================
+		Border Color
+		========================================================================== */
+
+	.wpb_theme_paignation li.active>span,
+	.wpb_theme_paignation li > a:hover,
+	.btn-common,
+	input[type="submit"],
+	.section-title:before,
+	.service-item:hover i,
+	.btn-common.active,
+	#notice .notice-content,
+	.clients-scroller .owl-pagination .owl-page span,
+	#footer-widgets .widget-title:before,
+	#team-block-2 .team-member:hover,
+	#tabs .tabs-style-2 .nav-tabs li.active a,
+	#tabs .tabs-style-2 .nav-tabs li.active a:hover,
+	#tabs .tabs-style-2 .nav-tabs li.active a:focus,
+	#tabs .tabs-style-2 .nav-tabs li a:hover,
+	#tabs .tabs-style-2 .nav-tabs,
+	article.post .reading:after,
+	.flat li a i,
+	.scroll-top:hover,
+	.small-title:before,
+	.navbar-plain .dropdown .dropdown-menu,
+	.navbar-plain .navbar-toggle,
+	.comment-area input[type="text"],
+	.comment-area textarea,
+	.widget-area .widget-title:before,
+	#project .social-links a i,
+	.service-item:hover .icon,
+	.form-group .form-control:focus,
+	.widget-area .search-box .input-group .form-control:focus,
+	.plain-vc-btn.btn-border,
+	.woocommerce a.button,
+	.woocommerce #review_form #respond .form-submit input#submit:hover,
+	.woocommerce .woocommerce-message,
+	.woocommerce .cart .button,
+	.woocommerce .cart input.button,
+	.woocommerce table.cart td.actions .coupon input[type="submit"],
+	.checkout_coupon input[type="submit"],
+	.woocommerce .woocommerce-info,
+	.woocommerce a.added_to_cart,
+	.woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover {
+	  border-color: 99cc33;
+	}
+
+	.woocommerce span.onsale:before {
+	  border-color: transparent #e74c3c;
+	}
+
+
+	/* ==========================================================================
+	   RGB background
+	   ========================================================================== */
+
+	.plain-bg-primary .upb_row_bg .upb_bg_overlay,
+	.page-header .page-header-inner:before{
+	  background-color: 99cc33!important;
+	  opacity: 0.2;
+	}
+
+	</style>
+	
+
+
+
+
+
+
+<!-- Main slider JS script file -->
+<!--<script type="text/javascript" 		    src="https://www.islamicity.org/wp-content/themes/plain-child/blueprint/template-includes/mighty-slider/src/js/mightyslider.min.js"></script>-->
+<!--<script type="text/javascript" 		    src="https://www.islamicity.org/wp-content/themes/plain-child/blueprint/template-includes/mighty-slider/src/js/mightyslider.js"></script>
+-->
+<!-- basic stylesheet with skins imported -->
+<!--
+<link rel="stylesheet" type="text/css" href="https://www.islamicity.org/wp-content/themes/plain-child/blueprint/template-includes/mighty-slider/src/css/mightyslider.css"/>
+-->
+
+
+
+<link rel="stylesheet" type="text/css" href="/wp-content/themes/plain-child/SoundManager/css/mp3-player-button.css" />
+<script type="text/javascript" src="/wp-content/themes/plain-child/SoundManager/script/soundmanager2-nodebug-jsmin.js"></script>
+<script type="text/javascript" src="/wp-content/themes/plain-child/SoundManager/script/mp3-player-button.js"></script>
+
+
+
+
+
+
+<link rel='stylesheet' id='background-style-css'  href='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/css/background-style.css?ver=4.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='ultimate-animate-css'  href='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/css/animate.css?ver=4.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='ultimate-style-css'  href='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/css/style.css?ver=4.6.1' type='text/css' media='all' />
+
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/js/ultimate_bg.js?ver=1.5.5'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/js/jparallax.js?ver=1.5.5'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/js/jquery.vhparallax.js?ver=1.5.5'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/js/jquery.appear.js?ver=1.5.5'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/parallax_video_backgrounds_vc/assets/js/custom.js?ver=1.5.5'></script>
+
+<link rel='stylesheet' id='js_composer_front-css'  href='https://www.islamicity.org/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=4.11.2.1' type='text/css' media='all' />
+
+
+
+
+<!-- slidebars 0 --------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- also see footer.php, header.php & header-bismillah-row.php and look for slidebars explanations -->
+<!-- slidebars 0 --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- slidebars 1 --------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- adds the slidebars.css -->
+<!--slidebars-5-->
+<!-- slidebars 1 --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<link rel='stylesheet'  type='text/css' media='all' href='https://www.islamicity.org/wp-content/themes/plain-child/blueprint/template-includes/joy-ride/joyride-2.1.css?ver=926169912'>
+<!-- see also the footer for the JS init-->
+
+
+<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons' type='text/css'><!--needed for the menu icon only-->
+<link rel='stylesheet'  type='text/css' media='all' href='/wp-content/themes/plain-child/blueprint/template-includes/sidebar-menu/sidenav.css?ver=926169912'>
+
+
+
+<!-- Owl Stylesheets --><!-- http://owlcarousel2.github.io/OwlCarousel2/demos/autowidth.html -->
+
+<link rel="stylesheet" href="/wp-content/themes/plain-child/blueprint/template-includes/owl-2/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/wp-content/themes/plain-child/blueprint/template-includes/owl-2/assets/owl.theme.default.min.css">
+<script src="/wp-content/themes/plain-child/blueprint/template-includes/owl-2/owl.carousel.min.js"></script>
+
+
+
+
+<script>
+var blp_cancelWowEffect = true;  // see cell_teams, blp_wrap, cell_portfolio!
+</script>
+
+
+<!--testing purpoes- overwriting styles - to load the various styles in this, check the id in the php file and load it as /?id=[1] for 1. -->
+
+
+<style>
+
+
+
+
+	/* [1] */
+
+	.col-lg-1, .col-lg-10,  .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+		padding-right: 2px;
+		padding-left: 2px;
+	}
+		/*
+		if we apply the above, the highlights (or whichever uses the col-lg-1 etc styles ) all of those columns will get closer to one another, with no padding gap.
+		on article pages this will be observed by lacking the seperation between the sidebar and main pane.
+		this is a subjective thing. if it looks better this way or not.
+		i have a setting on overwriting-dynamic-styles.php  if ?padding=0 then we apply these styles, otherwise we don't. I like it witohut the gutter.
+		*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+<script type='text/javascript' src='/wp-content/themes/plain-child/blueprint/cache/LoginStatusHTML-part-1-js.php?ver=may-01-926169912'></script>
+
+
+
+<!--<script src="/wp-content/themes/plain-child/blueprint/template-includes/filter/jquery.filterizr.js"></script>-->
+<script src="/wp-content/themes/plain-child/blueprint/template-includes/filter/jquery.filterizr.js?ver=may-21-2021"></script>
+<script src="/wp-content/themes/plain-child/blueprint/template-includes/filter/controls.js"></script>
+
+
+
+<link rel='stylesheet' id='plain-fonts-css-overwrites'  href='/wp-content/themes/plain-child/blueprint/template-includes/overwriting-styles.css?ver=dec-19-2022.2-added-liststyle-none926169912' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='tag-cloud-css'  href='/wp-content/themes/plain-child/blueprint/template-includes/tag-cloud/tag-cloud.css?ver=926169912' type='text/css' media='all' />
+
+<link rel='stylesheet' id='tag-cloud-css'  href='/wp-content/themes/plain-child/timeline.css?ver=926169912' type='text/css' media='all' />
+
+
+	<script>
+		BLP_MAKE_HEADER_STICKY_ON_MOBILE = true; // this can now be used overwriting-scripts.js
+	</script>
+	<style>
+	
+					#content {
+				margin-top:60px;
+			}
+				</style>
+
+
+	<script>
+		var MHK = false;
+	</script>
+	
+
+
+
+
+
+
+
+
+	<!-- BEGIN GOOGLE AD/SPONSORSHIP PART 1--><!-- SEE PART 2 BELOW-->
+		<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+		<script src='/global/google-ad-scripts-HEADER.js?ver=june-30-926169912'></script>
+	<!-- END GOOGLE AD/SPONSORSHIP PART 1-->
+
+	<!--nov 13,2017 Hotjar Start Commented out on 5/30/2018-->
+  <!--
+	<script>
+		(function(h,o,t,j,a,r){
+			h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+			h._hjSettings={hjid:668306,hjsv:6};
+			a=o.getElementsByTagName('head')[0];
+			r=o.createElement('script');r.async=1;
+			r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+			a.appendChild(r);
+		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+	</script>
+-->
+<!--nov 13,2017 Hotjar End -->
+
+
+
+
+
+
+
+<script>
+
+var ipad;
+var ipadpro;
+
+var standalone = window.navigator.standalone,
+userAgent = window.navigator.userAgent.toLowerCase(),
+safari = /safari/.test( userAgent ),
+ios = /iphone|ipod|ipad/.test( userAgent ),
+chrome = /chrome/.test( userAgent );
+
+//alert('chrome:' + chrome + ' \n\nuserAgent:' + userAgent);
+if ( chrome ) {
+	safari = false;
+}
+
+standalone_is_undefined = false;
+if ( typeof standalone === 'undefined' ) {
+	standalone_is_undefined = true;
+}
+
+ipad = false;
+ipadpro = false;
+webView = false;
+webViewAndIpad = false;
+
+
+
+// url manipulations
+urlnow = window.location.href;
+if ( urlnow.indexOf("env=app") > -1 ) {
+	webView = true;
+}
+if ( urlnow.indexOf("ipad=1") > -1 ) {
+	ipad = true;
+}
+if ( urlnow.indexOf("ipadpro=1") > -1 ) {
+	ipad = true;
+	ipadpro = true;
+}
+if ( webView && ipad ) {
+	webViewAndIpad = true; // ipadpro may or maynot be true!
+}
+
+
+// below is all about trying to set the above falses to true. there are no =false assignments below.
+if ( userAgent.indexOf("ipad") > -1 ) {
+	ipad = true;
+}
+
+if( ios ) {
+	if ( !standalone && !standalone_is_undefined && safari ) {
+			//browser
+			//alert('this is browser');
+	} else if ( standalone && !standalone_is_undefined && !safari ) {
+			//standalone
+			//alert('this is standalone');
+	} else if ( !standalone && !standalone_is_undefined && !safari ) {
+			//uiwebview
+			//alert('this is uiwebview');
+			webView = true;
+	};
+} else {
+		//not iOS [plain-chld/header.php + superpage's dev/production index.phps + quransearch index+index-mhk.phps + asp/php static headers]
+		var Android = userAgent.indexOf("android") > -1;
+		if ( Android ){
+			// webView = true;
+		}
+};
+
+if (!standalone && !standalone_is_undefined && !safari && ios && ipad ) {
+	webViewAndIpad = true;
+}
+
+
+// ipadpro patch!
+// when everything is false, (per  adji's test on ipadpro and whatsapp sharing ), we know that webview must be true. it is the ios being reported as false what throws things off. thanks to the test,we can overwrite that falseness. the screenshot tells us if all is reported as false, then you got a ipadpro running in the app.
+webViewORG = webView;
+ipadproORG = ipadpro;
+if ( (!webViewAndIpad && !webView && !standalone && !standalone_is_undefined && !safari && !ios && !ipad ) && ( userAgent.indexOf("mac os x") > -1 ) ) {
+	ipadpro = true;
+	webView = true;
+}
+
+
+if ( blpQS("report") == '1') {
+	alert('standalone:'+standalone + ' -- ' +  'safari:'+safari + ' -- ' + 'ios:'+ios + ' -- ' + 'ipad:' + ipad + ' -- ' + 'ipadproORG:' + ipadproORG + '\n' + 'userAgent:'+userAgent + '\n\nwebViewORG:' + webViewORG + ' -- webViewAndIpad:' + webViewAndIpad + '\n\nfinal ipadpro:' + ipadpro + ' -- final webview:' + webView + '\n\nif you are in inspector & in ios or ipad simulator, your chrome browser\'s useragent will be safari!');
+}
+
+
+if ( webView ) {
+		document.addEventListener('DOMContentLoaded', function(event) {
+			if ( document.querySelector('.page-header') ) {
+				document.querySelector('.page-header').style.cssText = 'margin-top: 45px !important;';	// 45 is good for short term as of nov 25. in jan or so, make it  25px
+			}
+
+			if ( document.querySelector('#showLeftPush') ) {
+				//document.querySelector('#showLeftPush').style.cssText = 'top: 40px !important;';
+				//document.querySelector('#nav').style.cssText = 'top: 40px !important;';
+			}
+		});
+}
+
+</script>
+
+
+
+<style>
+	/* styling Loader */
+	.no-js #loader { display: none;  }
+	.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+	.se-pre-con {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+			background: url(/global/images/Preloader_11.gif) center no-repeat #fff;
+
+	}
+</style>
+
+
+<script type='text/javascript' src='/wp-content/plugins/blueprint/third-party/js-cookies/js-cookies.js?ver=15257'></script>
+<script type='text/javascript' src='/wp-content/plugins/blueprint/blp-js-library.js?ver=nov-15-2021nov-4-2021'></script>
+
+<script>
+	if ( blpGetCookie('appPrompt6') ) {
+			//go silent
+	} else {
+		blpSetCookie('appPrompt6','shown','1 days');
+		document.write ('<meta name="apple-itunes-app" content="app-id=1505018725">');
+	}
+</script>
+
+
+
+<!-- Fundraise Up: world-class checkout experience for serious online fundraising -->
+<script>(function(w,d,s,n,a){if(!w[n]){var l='call,catch,on,once,set,then,track'
+.split(','),i,o=function(n){return'function'==typeof n?o.l.push([arguments])&&o
+:function(){return o.l.push([n,arguments])&&o}},t=d.getElementsByTagName(s)[0],
+j=d.createElement(s);j.async=!0;j.src='https://cdn.fundraiseup.com/widget/'+a;
+t.parentNode.insertBefore(j,t);o.s=Date.now();o.v=4;o.h=w.location.href;o.l=[];
+for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o}
+})(window,document,'script','FundraiseUp','AUCNGPLU');</script>
+<!-- End Fundraise Up -->
+
+
+
+<style>.greg-date{color:#6c8202;} .hijri-date {color: #6c8202;}</style></head>
+
+
+
+
+
+
+
+
+
+<body class="post-template-default single single-post postid-14656 single-format-standard group-blog wpb-js-composer js-comp-ver-5.0.1 vc_responsive views-template-post-content" id='the_body'>
+<div class="background-content"><!--toggleOverlay 3of4: this will close at right before </body> -->
+
+
+
+<div class="se-pre-con"></div>
+	<!-- blp-manage-state / blp_manageState HOOK BEGIN : see overwriting-scripts.js, & search for blp_manageState to see part2 of thius technqiue -->
+
+		<style>
+
+			.blp-manage-state{
+
+				z-index:99999;
+				display:none;  /* this gets set to true on demand within the blp_manageState function */
+				position:fixed;
+				top:200px;
+				left:0px;
+				width:100%;
+				height:50px;
+				background-color:orange;
+				color:black;
+				opacity:0.9;
+				padding-top:13px;
+				padding-left:30px;
+				font-size:16px;
+				font-family:Courier;
+			}
+		</style>
+
+		<div id='blp-manage-state' class='blp-manage-state'></div><!--this is used by the blp_manageState() js function defined at overwriting-scripts.js -->
+
+	<!-- blp-manage-state / blp_manageState HOOK END  -->
+
+
+	<!--campaign-settings-includer-begin--> 
+
+
+<!--###@campaign-settings-php-output-begins-here and right here: 20:31-->
+
+<script>
+
+
+var standalone = window.navigator.standalone,
+		userAgent = window.navigator.userAgent.toLowerCase(),
+		safari = /safari/.test( userAgent ),
+		ios = /iphone|ipod|ipad/.test( userAgent );
+
+webView = false;
+
+
+urlnow = window.location.href;
+if ( urlnow.indexOf("env=app") > -1 ) {
+	//alert('forcing web view...');
+	webView = true;
+}
+
+
+if( ios ) {
+		if ( !standalone && safari ) {
+				//browser
+				//alert('browser');
+		} else if ( standalone && !safari ) {
+				//standalone
+				//alert('standalone');
+		} else if ( !standalone && !safari ) {
+				//uiwebview
+				//alert('uiwebview');
+				webView = true;
+		};
+} else {
+		//not iOS
+		//alert('not IOS');
+};
+
+
+
+
+if ( webView ) {
+	//alert('webView:'+ webView);
+	$displayWhat = 'display:none !important';
+} else {
+	//alert('Welcome');
+	$displayWhat = 'display:block';
+}
+
+	
+
+
+</script>
+
+	<script>
+		var announcement_height_offset = 0; // this is re-set if announcement is in play and used by the overtwriting-script.js 
+	</script>
+	<script>
+	var aleemEffectIsOn = false; // when camapign and sponsorships are launched together, (in "both" mode), TRUTHY value on this var keeps a gap between bottom of the browser and the bottom of the campaign zone which happens after the sponsorship disappears. 
+</script> 
+
+	<script>
+
+		BLP_BLUEPRINT_CAMPAIGN_IS_ON = false;
+		BLP_THIS_CAMPAIGN_USES_OVERLAY = 0;
+
+	</script>
+
+	<script>
+		BLP_BLUEPRINT_SPONSORSHIP_IS_ON = true;
+	</script>
+
+		
+			
+				<link rel='stylesheet' id='plain-fonts-css-overwrites'  href='/global/sponsorship-styles.css?ver=2017-August-03926169912' type='text/css' media='all' />
+				
+				
+				<script>
+					if ( webView ) {
+						document.write ("<div id='sponsorship-area-wrapper' case='2' style='height:65px;z-index:100000000;display:none !important;position:fixed;left:0px;bottom:0px;width:100%;padding-top:0px;'> ");
+					} else {
+						document.write ("<div id='sponsorship-area-wrapper' case='2' style='height:65px;z-index:100000000;display:block;position:fixed;left:0px;bottom:0px;width:100%;padding-top:0px;'> ");
+					}
+				</script>
+
+			
+								
+											<!-- BEGIN GOOGLE AD/SPONSORSHIP PART 2--><!--SEE PART 1 ABOVE-->
+							<!-- /1016843/IC3Sponsorship2 -->
+							<center>
+								<div id='ad-slot' style="padding-top:5px;">
+									<script>
+										googletag.cmd.push(function() { googletag.display('ad-slot'); });
+									</script>
+								</div>
+							</center>
+
+					
+				</div>
+		
+				<!--<script src='/global/google-ad-scripts-FOOTER.js?ver=may-27-926169912'></script>-->
+				<!-- END GOOGLE AD/SPONSORSHIP PART 2-->
+				
+				<!--BEGIN##-->
+				<script>
+				// This is referenced by plain-child/header.php 
+				// this is google-ad-scripts-FOOTER.js
+
+				var serving_mobile_now;
+
+				if ( blpIsMobile() ) {
+						serving_mobile_now = true; // figure this out on the fly by some mobile detection js script. NO PHP! 
+				} else {
+					serving_mobile_now = false; // figure this out on the fly by some mobile detection js script. NO PHP! 
+
+				}
+				var random_num = Math.random(); 
+				random_num = random_num * 10;
+				random_num = Math.ceil(random_num);
+				var ui_class_name = 'ui-' + random_num;
+
+
+
+				jQuery('#sponsorship-area-wrapper').removeClass().addClass(ui_class_name); // this won't make a dif if the div with the #sponsorship-area-wrapper id has an inline background-color attr which it is.
+
+				if ( serving_mobile_now ) {
+					whenToCutHalfSponsorshipMessage = 2000; // this effectively cancels the 30px half size animation
+					whenToDisappearSponsorshipMessage = 2000; 
+				} else {
+					whenToCutHalfSponsorshipMessage = 2000; // this effectively cancels the 30px half size animation
+					whenToDisappearSponsorshipMessage = 2000; 
+				}
+
+
+				whenToCutHalfSponsorshipMessage = 0; // this removes the sponshorship div immediately upon scroll.
+				whenToDisappearSponsorshipMessage = 0; 
+
+
+
+
+
+
+				jQuery(window).scroll(function(){
+
+
+					scrollTopNow = jQuery(document).scrollTop();
+
+					switch(true) {
+						case scrollTopNow > whenToDisappearSponsorshipMessage:
+							jQuery('#sponsorship-area-wrapper').stop().animate({
+							height:'0px'
+							},100)
+							break;
+						case scrollTopNow > whenToCutHalfSponsorshipMessage:
+							jQuery('#sponsorship-area-wrapper').stop().animate({
+							height:'30px'
+							},100)
+							break;
+
+						default:
+		
+			
+						   jQuery('#sponsorship-area-wrapper').stop().animate({
+							height:'65px'
+							},100);
+		   
+			
+					}
+
+
+				});
+
+				</script>
+				<!--END##-->
+				
+							
+		
+		
+
+<!--###@campaign-settings-php-output-ends-here-->
+
+
+<!--campaign-settings-includer-end-->
+
+	<!-- slidebars 0 --------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- also see header.php, after-wp-head.php & footer.php and look for slidebars explanations -->
+<!-- slidebars 0 --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!--
+	this entire file was used to be at the header and
+	it did not have these inline styles you see below .
+	it is now included by the footer.php.
+	the reason we took it out from the header is
+	because what's in the header is in the canvas-container!
+-->
+
+
+
+<div id="roof-1" style='display:none'>
+	<table style="width:100%;margin-bottom:0px">
+		<tbody><tr>
+		<td style="font-size:16px;font-family:sans-serif;width:33%;padding-right:5px;background-color:blue;color:white;text-align:center"><a href="https://www.islamicity.org/global/donate-redirect.php?from=bismillah-header-zakat-al-fitr&destination=zakat_ul_fitr_link" target="_top"><span style="font-size:16px;font-family:sans-serif;color:white">PAY ZAKAT AL FITR NOW</span></a></td>
+		<td style="font-size:16px;font-family:sans-serif;width:33%;padding-right:5px;background-color:green;color:white;text-align:center"><a href="https://www.islamicity.org/global/donate-redirect.php?from=bismillah-header-zakat-al-mal&destination=zakat_ul_mal_link" target="_top"><span style="font-size:16px;font-family:sans-serif;color:white">PAY ZAKAT AL MAL</span></a></td>
+		<td style="font-size:16px;font-family:sans-serif;width:33%;background-color:purple;color:white;text-align:center"><a href="https://www.islamicity.org/global/donate-redirect.php?from=bismillah-header-calculator&destination=zakat_calculator_link" target="_top"><span style="font-size:16px;font-family:sans-serif;color:white"> CALCULATE YOUR ZAKAT</span></a></td>
+		</tr>
+	</tbody></table>
+</div>
+<div id="roof-2" style='display:none'>
+	<div align=middle style='color:green;font-size:14px'>
+		Welcome to the world's oldest and most recognized Islamic Web site. Have a blessed Ramadan! <a href="/login" class="social-link" data-toggle="tooltip" data-placement="bottom" title="Login / Register" data-original-title="">
+		<font color='red'>Login/Sign Up</font></a>
+	</div>
+</div>
+<script>
+	//setInterval(function(){ updateContentHeader() }, 5000);
+	var switcherHeader = 0;
+	function updateContentHeader(){
+		jQuery('#roof').fadeOut('slow', function() {
+			switcherHeader = switcherHeader+1;
+			if ( switcherHeader == 3 ) {
+				switcherHeader = 1;
+			}
+			var content = jQuery('#roof-'+switcherHeader).html();
+			jQuery('#roof').html(content);
+			jQuery('#roof').fadeIn('slow');
+		});
+	}
+</script>
+
+		<script>
+		if ( webView  ) {
+			document.write ("<div id='roof' style='display:none;' class='hidden-xs'>");
+		} else {
+			document.write ("<div id='roof' class='hidden-xs'>");
+		}
+		</script>
+
+
+
+
+			
+				<div class="container" style="background-color:whitesmoke;color:black;padding-left:0px;padding-right:0px;min-width:767px;">
+
+			
+		<!--	
+			<div class="quick-contacts pull-left">
+				<span>
+					<script src='/wp-content/themes/plain-child/blueprint/template-includes/header-top-date-script.js?Apr27-2020-2ver=1588000114'></script>
+				</span>
+			</div>
+		-->
+
+		<div class="quick-contacts pull-left">
+			<script src='/global/scripts/hijri-converter/mhk-hijri.js?ver=sep-13-2021-3'></script>
+			<span id='hjri-date-results' style='color:#759b06;'></span>
+			<script>
+				initializeHijriObjAndPaint(null,null,"buttonClick","for-islamicity-header");
+			</script>
+		</div>		
+
+
+			<div class="social-links text-center pull-right">
+
+				<a href="https://www.facebook.com/islamicity" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+					<i class="fa fa-facebook" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:20px;color:black;opacity:0.4;'></i>
+				</a>
+
+				<a href="https://twitter.com/islamicity" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+					<i class="fa fa-twitter" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:20px;color:black;opacity:0.4;'></i>
+				</a>
+
+				<a href="https://www.youtube.com/user/islamicitytv" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+					<i class="fa fa-youtube-play" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:0px;color:black;opacity:0.4;'></i>
+				</a>
+
+				<a href="https://www.pinterest.com/islamicity/" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+					<i class="fa fa-pinterest" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:0px;color:black;opacity:0.4;'></i>
+				</a>
+
+				<a href="https://instagram.com/islamicity/" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+					<i class="fa fa-instagram" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:0px;color:black;opacity:0.4;'></i>
+				</a>
+
+
+				<!--<a href="javascript:jQuery('#joyRideTipContent').joyride({autoStart : true,modal:true,expose: true});" class="social-link" data-toggle="tooltip" data-placement="bottom" data-original-title="Tour Guide For New IslamiCity">
+					<i class="fa fa-life-ring" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:0px;color:pink;opacity:0.7;'></i>
+				</a>
+				-->
+
+				<!--login-area-begin-->
+				<span id='login_area'>
+					<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain-child/blueprint/cache/LoginStatusHTML-part-2-js.php?ver=926169912'></script>
+
+				 </span>
+				 <!--login-area-end-->
+
+				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				 <a href="https://www.allah.org"><img id='bismillah' src='/wp-content/themes/plain-child/images/BesmeAllah-inverse.png'></a>
+
+			</div>
+		</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+	<!--the new menu icon-->
+
+
+
+
+		<script>
+		if ( webView  ) {
+			// https://www.islamicity.org/search/?env=app&q=#gsc.tab=0&gsc.q=zakat&gsc.sort=
+			// but the SEARCH page title appears above the BACK button. is there a wordpress page called SEARCH?
+			// need some adjustment in there.
+			// alert('history.length:' + history.length);
+			//$historyLength = history.length;
+			//alert('history.length:' + history.length);
+			// first time:
+			//if ( $historyLength > 2 ) {
+				document.write ("<div align='left' style='margin-top:20px;margin-bottom:7px;margin-left:15px;'>&nbsp;</div>"); //
+			//}
+
+			document.write ("<div style='margin-top:-75px'>");
+			document.write ("<div style='display:none' >");
+		}
+		</script>
+
+
+		
+<!-- BEGIN|this is toggleOverlay-part-2-menu-code.htm -->
+<!-- when you make changes to this, you need to see these files too: 404.php /   -->
+
+<div style="width:100%;position:fixed;z-index:150000" id='logo-header-div'>
+	<div class="logo-menu">
+		<nav class="navbar navbar-default navbar-plain" role="navigation" data-offset-top="50">
+			<div class="container" >
+				<a href="javascript://" id="sidenav-toggle" style='cursor:pointer'>
+					<img id='menu-icon' src='/wp-content/themes/plain-child/images/menu.png' style='z-index:0;cursor:pointer;position:fixed;display:none'>
+				</a>
+				<div class="navbar-header">
+					<!--##toggleOverlay--><!--for-mobile-->
+					<img class="navbar-toggle collapsed new-search-box" onclick="var overlay = document.querySelector('body');overlay.classList.toggle('hide-overlay');jQuery('.overlay').css('display', 'block');document.getElementById('q').focus();" type='image' src='/global/images/fake-search-box.png' value='' placeholder='Search IslamiCity' style='opacity: 1;cursor:pointer;'>					
+
+					<div class="plain-logo-wrapper">
+							<img id='logo' style='z-index:0;cursor:pointer;'  onClick='window.location.href="/"' id="logo"
+							src="/wp-content/uploads/2015/05/logo-header.png" alt="IslamiCity">
+					</div>
+				</div>
+
+				<div id="plain-navbar" class="collapse navbar-collapse">
+					<ul id="menu-main-menu" style='text-align: center;' class="nav navbar-nav animated-nav navbar-right">
+						
+						<li id="menu-item-7498" >
+							<img onclick="var overlay = document.querySelector('body');overlay.classList.toggle('hide-overlay');jQuery('.overlay').css('display', 'block');document.getElementById('q').focus();" type='image' src='/global/images/fake-search-box.png' value='' placeholder='Search IslamiCity' class='new-search-box' style='opacity: 1;cursor:pointer;'>
+							<script>
+								var pageJustLoaded = true;
+								var overlay = document.querySelector('body');
+								overlay.classList.toggle('hide-overlay');
+								jQuery('.overlay').css('display', 'block');
+								if (webView || pageJustLoaded ) {
+
+								} else {
+									document.getElementById('q').focus();							
+								}
+								pageJustLoaded = false;
+								
+							</script>
+						
+						</li>
+
+						
+
+						<li id="menu-item-10641" ><a class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Donate"  href="/global/donate-redirect.php?from=site-header-/?ft=1&AspxAutoDetectCookieSupport=1&destination=donate-page"><font style='color:#27ae60;font-weight:bold'>DONATE</font> <img class='moving-arrow' src='/wp-content/themes/plain-child/images/donate.png'></a></li>
+						<li class='login' id="menu-item-10642" ><a title="" href="/login">Login/Signup</a></li>
+						<li><a title="Live Audio Feed for Quran Recitation with English Translation"  href="https://www.islamicity.org/10391/quran-audio-recitation/"><img src='/wp-content/themes/plain-child/images/quran-audio.png?v=12?v=12' style="position: absolute; margin-top: -8px; margin-left: -12px; width: 42px; height: 30px; cursor: pointer; font-size: 23px; color: red; opacity: 1; " /></a>
+					</ul>
+				</div>
+
+		</nav>
+	</div> <!-- Logo menu-->
+</div>
+
+<!-- END|this is toggleOverlay-part-2-menu-code.htm -->
+
+			</div>
+
+			<script>
+				if ( webView  ) {
+					document.write ("</div>");
+					document.write ("</div>");
+					//document.write ("<hr><div align='right' style=''><a href='/'>HOME</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='javascript:history.back()'>BACK</a></div>");
+				}
+			</script>
+
+
+	<!--[if lt IE 9]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+
+	<div id="page" class="hfeed site">
+
+		<a class="skip-link screen-reader-text" href="#content">
+			Skip to content		</a>
+
+		<header id="header-wrap" class="clearfix default-header">
+			<!--see footer.php if you are looking for bismillah-row & nav-bar-->
+		</header>
+
+					<!--case:get_current_template() IS NOT 'archive.php'-->
+			<!--func:do_action( 'plain_after_header' )-->
+							<div id="content" class="site-content container">
+				<div class="site-row row">
+						<!--func:/do_action( 'plain_after_header' )-->
+			<!--case:/get_current_template() IS NOT 'archive.php'-->
+				<!--file:/header.php-->
+				<div id="primary_outer" class="content-area col-md-12">					<main id="main" class="site-main" role="main">
+
+					
+
+						<!--
+check all blp_qs end points
+
+check all blp do not cache points
+this file is loaded by the single.php so it should not have any do not cache markers. single.php alsready does that anyway )
+
+
+	CHECK
+	<img class="oo qk s t u iv ai je" width="3376" height="6000" srcset="https://miro.medium.com/max/552/1*0fd8y7nv1IJOjgJycsReaQ.jpeg 276w, https://miro.medium.com/max/1104/1*0fd8y7nv1IJOjgJycsReaQ.jpeg 552w, https://miro.medium.com/max/1280/1*0fd8y7nv1IJOjgJycsReaQ.jpeg 640w, https://miro.medium.com/max/1400/1*0fd8y7nv1IJOjgJycsReaQ.jpeg 700w" sizes="700px" role="presentation" src="https://miro.medium.com/max/6752/1*0fd8y7nv1IJOjgJycsReaQ.jpeg">
+
+	COME UP WITH html for better views...
+
+	as you now know, ic nav bar disappears as you scroll down.
+	this gives us the ability to offer a perfect reading env and a fix to the scroll issue
+
+	moved the faith to left for desktop
+
+	aligned the article p line with faith
+
+	made p length exactly like medium
+
+	allowed the postbody to expand as much to the left and right within container
+
+	making sure, neither images nor hor lines won;t go over the social icons.
+
+	pushed the socials more towards down for desktop
+
+	made sure h3,h4,h5 is aligned to 17 padding-left just like the p
+
+	same thing goes with <ul> -- these fixed the matter with RB's article.
+
+	removed the | in front of the blockquotes
+
+	created function to cut down the too-much-tagging problem. max 3 shows now.
+
+	changed title from disclaimer to COMMENTS DISCLAIMER & RULES OF ENGAGEMENT
+		this means we need to insert the RULES OF ENGAGEMENT  in that same area!
+
+
+	enabled the share-your-selection feature ( a medium.com site feature which allows you to tweet/share easily)
+
+	added sticky menu to the side...
+
+	somewhat fixed the out of line hamburger menu appearance on desktop landing
+
+
+-->
+
+
+<!--INITIALIZE POST LEVEL DATA-->
+<!--no tags--><!--no tags--><!--blp:paging is not asked for $the_blp_id -->
+
+<style>
+	.owl-carousel .owl-stage-outer {
+		margin-bottom: -20px;
+	}
+
+	.owl-nav {
+		display:none;
+	}	
+</style>	
+
+
+
+
+		<Script>
+			var menuStays = 1;
+		</script>
+
+        <!--<link rel="stylesheet" href="/wp-content/plugins/blueprint/playground/share-this/share-this.css?v=1">-->
+        <style>
+          @-webkit-keyframes share-this-intro{0%{-webkit-transform:translateY(-3em);opacity:0}80%{-webkit-transform:translateY(.5em);opacity:1}to{-webkit-transform:translateY(0)}}@keyframes share-this-intro{0%{transform:translateY(-3em);opacity:0}80%{transform:translateY(.5em);opacity:1}to{transform:translateY(0)}}.share-this-popover{max-width:8em;pointer-events:none;-webkit-filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));-webkit-animation:share-this-intro .3s;animation:share-this-intro .3s}.share-this-popover::before{content:"";position:absolute;bottom:100%;left:50%;width:0;height:0;margin:.25em -.5em;border-width:.5em .5em 0;border-style:solid;border-color:#333 transparent}.share-this-popover>ul{pointer-events:auto;list-style:none;padding:0;margin:-.75em 0 0;white-space:nowrap;background:#333;color:#fff;border-radius:.25em;position:absolute;left:50%;-webkit-transform:translate(-50%,-100%);-ms-transform:translate(-50%,-100%);transform:translate(-50%,-100%)}.share-this-popover>ul>li{display:inline-block;background-color: #faebd7d1;padding:2px;width:3em;height:3em;line-height:2em;text-align:center}.share-this-popover>ul>li>a{display:inline-block;width:100%;height:100%;color:inherit;box-sizing:border-box;padding:.35em}.share-this-popover>ul>li>a:focus,.share-this-popover>ul>li>a:hover{background:rgba(255,255,255,.25)}@media (pointer:coarse){.share-this-popover{font-size:150%}.share-this-popover::before{bottom:auto;top:100%;border-width:0 .5em .5em;margin-top:0}.share-this-popover>ul{top:100%;transform:translateX(-50%);margin:.5em 0 0}}@media (max-width:575px){.share-this-popover{left:0!important;right:0!important;width:auto!important;max-width:none}.share-this-popover::before{bottom:auto;top:100%;border-width:0 .5em .5em;margin-top:0}.share-this-popover>ul{top:100%;transform:translateX(-50%);margin:.5em 0 0;left:0;width:100%;transform:none;border-radius:0;text-align:center}}
+
+		  .share-this-popover>ul>li {
+				background-color: #a79068b0;
+				padding: 2px;
+				width: 2.8em;
+				height: 3em;
+			}
+
+        </style>
+
+
+
+
+
+
+<article id="post-14656" class="post-14656 post type-post status-publish format-standard hentry category-articles category-faith category-featured tag-backbiting tag-hoax source-truthdig by-mansoor-alam">
+
+
+
+
+
+	<!--HEADER-->
+	<header class="entry-header">
+		<h1 class="blog-title entry-title">Spreading Rumors and Suspicions</h1>	</header><!-- .entry-header -->
+
+
+
+
+
+	<!--CONTENT-IMAGE-->
+	<div class="content-and-image">
+		<div class="main-content-area">
+
+			<!--META-DATA-->
+							<div class="entry-meta">
+					<!--no tags--><!--no tags--><!--blp:paging is not asked for $the_blp_id --><span><i class="fa fa-user"></i> By: <a class='blp_the_by' href='/by/mansoor-alam'>Mansoor Alam</a>&nbsp;&nbsp;&nbsp;Source: <a class='' href='/source/truthdig'>Truthdig</a></span><span><i class="fa fa-clock-o"></i> <a href="https://www.islamicity.org/14656/spreading-rumors-and-suspicions/" rel="bookmark">Mar 27, 2018</a></span><span><i class="fa fa-comments"></i> <a href="https://www.islamicity.org/14656/spreading-rumors-and-suspicions/#respond">No Comments</a></span><!--see functions.php-->
+				</div><!-- .entry-meta -->
+			
+
+			<!--IMAGE-->
+			
+	
+
+
+<!--BLP-SHORTCODE-BEGIN--><img src='https://www.islamicity.org/wp-content/plugins/blueprint-timthumb/timthumb.php?src=http://media.islamicity.org/wp-content/uploads/2018/03/Backbiting.jpg&w=1200&h=675&q=100' class="thumbnailpostcontent" >
+
+
+<!--BLP-SHORTCODE-END-->
+
+
+			<!--IMAGE-CAPTION-->
+			
+
+
+
+
+							<p>
+				<div style="font-size:100%;background:#ffffff;padding-top:20px;display:none">
+			
+				<div class="taxonomypostcontent">
+
+					<b>Category:</b> <span style="text-transform: capitalize;"><a  href='https://www.islamicity.org/explore/topics/faith/'>Faith &amp; Spirituality</a>, <a  href='https://www.islamicity.org/explore/featured/'>Featured</a></span> <b>Topics:</b> <span style="text-transform: capitalize;"><a  href='https://www.islamicity.org/topics/backbiting/'>Backbiting</a>, <a  href='https://www.islamicity.org/topics/hoax/'>Hoax</a></span> <b>Views:</b> 10205 <hr>10205
+
+
+
+			</div></div>
+
+
+
+
+
+			
+				<br>
+
+
+				<div class="entry-content">
+					
+
+
+
+
+
+
+
+
+
+						<script>
+							appear({
+							  init: function init(){
+							  },
+							  elements: function elements(){
+								// work with all elements with the class "track"
+								return document.getElementsByClassName('entry-footer clearfix');
+							  },
+							  appear: function appear(el){
+								document.getElementById("socials-container").style.display = "none";
+							  },
+							  disappear: function disappear(el){
+								document.getElementById("socials-container").style.display = "block";
+							  },
+							  bounds: 200,
+							  reappear: true
+							});
+						</script>
+
+
+						<div id='socials-container' style='z-index:1'>
+
+							<div id='socials'>
+
+								<!--FACEBOOK-->
+								<a title='facebook' target=_blank href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F">
+									<img class='side-social-share-icons'  src='/wp-content/themes/plain-child/images/social-facebook.png'>
+								</a>
+
+
+
+
+
+								<!--TWITTER-->
+								<div class='social-spacer'></div>
+								<a title='twitter'  target=_blank href="https://twitter.com/intent/tweet?text=Sharing Spreading+Rumors+and+Suspicions --- https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F">
+									<img class='side-social-share-icons'  src='/wp-content/themes/plain-child/images/social-twitter.png'>
+								</a>
+
+
+								<!--WHATSAPP X-->
+								<div class='social-spacer'></div>
+
+																		<script>
+									if ( webView ) {
+										// document.write ("<a title='whatsapp'  target=_blank href=\"whatsapp://send?text=Spreading+Rumors+and+Suspicions -- https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F\">");
+									} else {
+										var IS_MOBILE = blpIsMobile();
+										if ( IS_MOBILE ) {
+											document.write ("<a title='whatsapp'  target=_blank href=\"whatsapp://send?text=Spreading+Rumors+and+Suspicions -- https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F\">");
+										}
+										if ( !IS_MOBILE ) {
+											//alert('Thank you for visiting IslamiCity.');
+											document.write ("<a title='whatsapp'  target=_blank href=\"https://web.whatsapp.com/send?text=Spreading+Rumors+and+Suspicions -- https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F\">");
+										}
+										
+										document.write ("<img class='side-social-share-icons'  src='https://icons.iconarchive.com/icons/dtafalonso/android-l/48/WhatsApp-icon.png'></a>");
+									}
+									</script>
+
+
+
+
+
+
+
+
+								<div class='social-spacer'></div>
+								<div class='social-spacer'></div>
+								<div class='social-spacer'></div>
+								<script>
+									if (webView ) {
+										// nada
+									} else {
+										document.write ("<a href=\"javascript://\" id=\"sidenav-toggle\" style=\"cursor:pointer\"><span style='color:teal;font-size:10px;'>MENU</a>");
+									}
+								</script>
+
+									<!--<img src="/wp-content/themes/plain-child/images/menu.png" >-->
+
+								</a>
+
+
+								<div class='social-spacer'></div>
+								<div class='social-spacer'></div>
+
+
+
+
+								<!--GOOGLE-PLUS-->
+								<div class='social-spacer'></div>
+								<meta name="twitter:card" content="summary_large_image">
+								<meta name="twitter:site" content="islamicity.org">
+								<meta name="twitter:title" content="Spreading Rumors and Suspicions">
+								<meta name="twitter:description" content="Backbiting, attaching labels, insulting one another by nicknames, spreading rumors and suspicions about others are major sins in Islam. These are despicable acts in the sight of Allah. The following verses are very clear on this issue: “O you who believe! Let not a group scoff at another group, it may be that the latter&#8230;">
+								<meta name="twitter:image" content="https://www.islamicity.org/wp-content/plugins/blueprint-timthumb/timthumb.php?src=http://media.islamicity.org/wp-content/uploads/2018/03/Backbiting.jpg&w=1200&h=675&q=100">
+								<meta name="twitter:creator" content="islamicity.org">
+								<!--
+								<a title='google plus'  target=_blank href="https://plus.google.com/share?url=https%3A%2F%2Fwww.islamicity.org%2F14656%2Fspreading-rumors-and-suspicions%2F">
+									<img class='side-social-share-icons' style='width: 65%;padding-left: 3px;'  src='/wp-content/themes/plain-child/images/social-google.png'>
+								</a>
+								<div class='social-spacer'></div>
+								-->
+
+
+
+
+
+								<!--EMAIL-->
+								<!--
+								<a title='email'  href="mailto:?&body=I saw this on IslamiCity.org and thought you might like it:%0D%0Ahttps://www.islamicity.org/14656/spreading-rumors-and-suspicions/?referral=email&Subject=IslamiCity.org | Spreading Rumors and Suspicions" target="_top">
+								<!--<i style="color: red;font-size: 40px;padding-left:8px;"class="fa fa-envelope side-social-share-icons-fa"></i></a>-->
+								<!--
+								<img class='side-social-share-icons'  style='width: 72%; padding-left: 1px;' src='/wp-content/themes/plain-child/images/social-email.png'>
+								-->
+
+								<!--DISQUS-->
+								
+									<div class='social-spacer'></div>
+									<div class='social-spacer'></div>
+									<div class='social-spacer'></div>
+
+										
+																							<!--<img style='padding-left: 3px; width: 73%;' class='side-social-share-icons'  src='/wp-content/themes/plain-child/images/social-comment.png'>-->
+
+
+
+												<a title='disqus comments' href="https://www.islamicity.org/14656/spreading-rumors-and-suspicions/#respond">
+												<img style='padding-left: 3px;padding-right: 5px;width: 69%;margin-top: 31px;' class='side-social-share-icons'  src='/wp-content/themes/plain-child/images/social-disqus.png'>
+																					</a>
+
+								
+
+																	<div class='social-spacer'></div>
+									<div class='social-spacer'></div>
+									<div class='social-spacer'></div>
+
+
+															</div>
+						</div>
+										<!--ARTICLE TOOLS END-->
+
+
+
+
+
+					<div class="postbody"><!--haydi bakam-->
+						<!--post-content--><!--THE-START--><!--TOC-->
+<p><!--THE-START-->Backbiting, attaching labels, insulting one another by nicknames, spreading rumors and suspicions about others are major sins in Islam. These are despicable acts in the sight of Allah. The following verses are very clear on this issue:</p>
+<p>“<em>O you who believe! Let not a group scoff at another group, it may be that the latter are better than the former; nor let (some) women scoff at other women,  it may be that latter are better than the former, nor defame one another, nor insult one another by nicknames. How bad is it, to insult one’s brother after having Faith. And whosoever does not repent (tauba), then such are indeed the wrongdoers (Zaalimeen)"</em> (<a href="/quransearch/?ref=49:11">49:11</a>)</p>
+<p>“<em>O you who believe! Avoid much suspicions, indeed some suspicions are sins. And spy not, neither backbite one another. Would one of you like to eat the flesh of his dead brother? You would hate it (so hate backbiting). And fear Allah. Verily, Allah is the one Who accepts repentance (tauba), Most Merciful.</em>”  (<a href="/quransearch/?ref=49:12">49:12</a>)</p>
+<p>The Prophet (PBUH) in an authentic hadith said:</p>
+<p><em>Do you know what backbiting is? They (the Companions) said: Allah and his messenger know best. Thereupon he (the Prophet) said: “Backbiting implies your talking about your brother in a manner which he does not like.” It was said to him: What is your opinion about this that if I actually find (that failing) in my brother which I made a mention of? He (the Prophet) said: “If (that failing) is actually found (in him), you in fact backbited him and if that is not in him, it is slander (buhtaan).</em>” (Sahih Al-Muslim)</p>
+<p>Also, we are asked by Allah to seek refuge from the evil of whisperers (<a href="/quransearch/?ref=114:5-114:6">114:5-6</a>).</p>
+<p>The Quran also mentions that the technique of furtive whispering to others is used by the devil.</p>
+<p>“<em>Then began Satan to whisper suggestions to them…</em>” (<a href="/quransearch/?ref=7:20">7:20</a>)</p>
+<p>This is a dishonorable way to function. Instead of coming into the open and providing clear evidence, such people secretly whisper and incite others to follow rumors and suspicions. But, it is equally despicable and dishonorable to fall prey to such rumors and suspicions, which happens when we do not verify facts.</p>
+<p>Some Muslims, even Islamic scholars, use this technique to discredit those who differ from them. The history of Muslims provides clear evidence of how this technique was used to crush a difference of opinion. The blood of a large number of Muslims (who differed from the established hierarchy), was spilled by Muslim kings.  In our own time, just look around the Muslim world today – Afghanistan, Algeria, Egypt, Iraq, Libya, Syria, and Turkey just to name a few — where (political and religious) battle lines are drawn between different groups of Muslims. Indeed, we, each one of us, need only to look at our own actions!  Creating groups or sects in Islam is Shirk according to the Quran (<a href="/quransearch/?ref=30:31-30:32">30:31-32</a>) and our Prophet (PBUH) has nothing to do with them (<a href="/quransearch/?ref=6:159">6:159</a>).</p>
+<p>“<em>And do not be like the Mushrikun. Those who split up their religion, and become sects, - each sect rejoicing in that which is with itself.</em>”   (<a href="/quransearch/?ref=30:31-30:32">30:31-32</a>)</p> <center><div id="google-ad-wrapper" style="display:none"><div id="div-gpt-ad-1493166219870-0" style="height: 250px; width: 300px; margin-right: 15px; margin-bottom: 35px;"><span style="font-size: 60%; text-align: right;">Advertisement</span><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1493166219870-0"); }) </script></div></div></center> 
+<p>“<em>As for those who divide their religion and break up into sects, you (Muhammad) have no part in them in the least.</em>” (<a href="/quransearch/?ref=6:159">6:159</a>)</p>
+<p>According to Ummul Momineen ‘Aisha (R), our Prophet (PBUH) was a walking Quran. So, how could our Prophet (PBUH) say anything or do anything against the Quran? How can any Muslim believe that our Prophet (PBUH) was just a postman, when, in fact, he received the revelation from Allah, transmitted it faithfully, and lived his life according to it and successfully implemented it as the constitution to govern the life of the Muslim community?</p>
+<p>Let us not be self-righteous, passing judgement against other Muslims who do not follow our own line of thought. Let us try to be tolerant, openhearted, and generous like our Prophet (PBUH) was. This is a very good Sunnah for us to practice.<!--gone @ Sep 25, 2018--><!--gone @ Sep 27, 2018--><!--gone @ Sep 26A, 2018--><!--gone @ 9/28/2018 06:50:14 AM--><!--gone @ 10/5/2018 05:53:18 AM--><!--gone @ 10/22/2018 05:25:44 AM--><!--gone @ 11/3/2018 22:31:14 PM--><!--gone @ 11/22/2018 05:04:38 AM--><!--gone @ 11/25/2018 16:27:09 PM--><!--gone @ 1/5/2019 23:40:36 PM--><!--gone @ 1/15/2019 05:45:13 AM--><!--gone @ 1/19/2019 16:49:09 PM--></script><!--THE-END--></p>
+<!--THE-END--><!--post-content--><div style="clear: both;"></div><!--google-ads-eligible-article-->
+
+
+
+								<!--
+									<div class="reading clearfix">
+																			</div>
+								-->
+
+
+
+
+
+								<form autocomplete="off" name="wpv-filter-8280-TCPID14656" action="/14656/spreading-rumors-and-suspicions/?ft=1&#038;wpv_view_count=8280-TCPID14656" method="get" class="wpv-filter-form js-wpv-filter-form js-wpv-filter-form-8280-TCPID14656 js-wpv-form-full" data-viewnumber="8280-TCPID14656" data-viewid="8280" data-viewhash="eyJuYW1lIjoiUmVsYXRlZF9TZXJpZXMiLCJvcmRlciI6ImFzYyJ9" data-viewwidgetid="0" data-orderby="" data-order="" data-orderbyas="" data-orderbysecond="" data-ordersecond="" data-parametric="{&quot;query&quot;:&quot;normal&quot;,&quot;id&quot;:&quot;8280&quot;,&quot;view_id&quot;:&quot;8280&quot;,&quot;widget_id&quot;:0,&quot;view_hash&quot;:&quot;8280-TCPID14656&quot;,&quot;action&quot;:&quot;\/14656\/spreading-rumors-and-suspicions\/?ft=1&#038;wpv_view_count=8280-TCPID14656&quot;,&quot;sort&quot;:{&quot;orderby&quot;:&quot;&quot;,&quot;order&quot;:&quot;&quot;,&quot;orderby_as&quot;:&quot;&quot;,&quot;orderby_second&quot;:&quot;&quot;,&quot;order_second&quot;:&quot;&quot;},&quot;orderby&quot;:&quot;&quot;,&quot;order&quot;:&quot;&quot;,&quot;orderby_as&quot;:&quot;&quot;,&quot;orderby_second&quot;:&quot;&quot;,&quot;order_second&quot;:&quot;&quot;,&quot;ajax_form&quot;:&quot;&quot;,&quot;ajax_results&quot;:&quot;&quot;,&quot;effect&quot;:&quot;fade&quot;,&quot;prebefore&quot;:&quot;&quot;,&quot;before&quot;:&quot;&quot;,&quot;after&quot;:&quot;&quot;,&quot;attributes&quot;:{&quot;order&quot;:&quot;asc&quot;},&quot;environment&quot;:{&quot;current_post_id&quot;:14656,&quot;parent_post_id&quot;:14656,&quot;parent_term_id&quot;:0,&quot;parent_user_id&quot;:0,&quot;archive&quot;:{&quot;type&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;data&quot;:[]}},&quot;loop&quot;:{&quot;type&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;data&quot;:[],&quot;id&quot;:0}}" data-attributes="{&quot;order&quot;:&quot;asc&quot;}" data-environment="{&quot;current_post_id&quot;:14656,&quot;parent_post_id&quot;:14656,&quot;parent_term_id&quot;:0,&quot;parent_user_id&quot;:0,&quot;archive&quot;:{&quot;type&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;data&quot;:[]}}"><input type="hidden" class="js-wpv-dps-filter-data js-wpv-filter-data-for-this-form" data-action="/14656/spreading-rumors-and-suspicions/?ft=1&#038;wpv_view_count=8280-TCPID14656" data-page="1" data-ajax="disable" data-effect="fade" data-maxpages="0" data-ajaxprebefore="" data-ajaxbefore="" data-ajaxafter="" /><input class="js-wpv-extra-url-param" id="wpv_param_ft" type="hidden" name="ft" value="1" /><input class="wpv_view_count wpv_view_count-8280-TCPID14656" type="hidden" name="wpv_view_count" value="8280-TCPID14656" />
+
+</form>
+<div id="wpv-view-layout-8280-TCPID14656" class="js-wpv-view-layout js-wpv-layout-responsive js-wpv-view-layout-8280-TCPID14656 wpv-pagination js-wpv-layout-has-pagination js-wpv-layout-infinite-scrolling wpv-pagination-preload-images js-wpv-layout-preload-images wpv-pagination-preload-pages js-wpv-layout-preload-pages" style="visibility:hidden;" data-viewnumber="8280-TCPID14656" data-pagination="{&quot;id&quot;:&quot;8280&quot;,&quot;query&quot;:&quot;normal&quot;,&quot;type&quot;:&quot;ajaxed&quot;,&quot;effect&quot;:&quot;infinite&quot;,&quot;duration&quot;:500,&quot;speed&quot;:5,&quot;pause_on_hover&quot;:&quot;disabled&quot;,&quot;stop_rollover&quot;:&quot;false&quot;,&quot;cache_pages&quot;:&quot;enabled&quot;,&quot;preload_images&quot;:&quot;enabled&quot;,&quot;preload_pages&quot;:&quot;enabled&quot;,&quot;preload_reach&quot;:1,&quot;spinner&quot;:&quot;builtin&quot;,&quot;spinner_image&quot;:&quot;&quot;,&quot;callback_next&quot;:&quot;&quot;,&quot;manage_history&quot;:&quot;enabled&quot;,&quot;has_controls_in_form&quot;:&quot;disabled&quot;,&quot;infinite_tolerance&quot;:0,&quot;max_pages&quot;:0,&quot;page&quot;:1,&quot;base_permalink&quot;:&quot;/14656/spreading-rumors-and-suspicions/?ft=1&amp;wpv_view_count=8280-TCPID14656&amp;wpv_paged=WPV_PAGE_NUM&quot;,&quot;loop&quot;:{&quot;type&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;data&quot;:[],&quot;id&quot;:0}}" data-permalink="/14656/spreading-rumors-and-suspicions/?ft=1&#038;wpv_view_count=8280-TCPID14656">
+
+	
+	
+		<strong></strong>
+	
+</div>
+</div><!--postbody--><div class="postbody"><hr><div class="afterpostbody">			
+				<style>
+	.owl-related {
+		width: 200px !important;
+		height:221px;
+		padding-left: -3px;
+	}
+</style>
+
+				<div style="font-size:100%;background:#ffffff;">
+			
+				<div class="taxonomypostcontent">
+
+					&nbsp;&nbsp;<b>Category:</b> <span style="text-transform: capitalize;"><a  href='https://www.islamicity.org/explore/topics/faith/'>Faith &amp; Spirituality</a>, <a  href='https://www.islamicity.org/explore/featured/'>Featured</a></span><br>&nbsp;&nbsp;<b>Topics:</b> <span style="text-transform: capitalize;"><a  href='https://www.islamicity.org/topics/backbiting/'>Backbiting</a>, <a  href='https://www.islamicity.org/topics/hoax/'>Hoax</a></a></span> <hr><b>Views:</b> 10205 
+
+
+
+			</div></div>                                		<style>
+										.instance-related-posts {
+											max-width:700px !important; /* you may want to program this to be wider if page is full-width - without this wrapper, carousel goes over the right sidebar! */
+										}
+                                		</style>
+
+                                		                                				<style>
+													.instance-related-posts {
+														max-width: inherit !important;
+													}
+													.owl-small {
+														max-width: inherit !important;
+														height: 140px !important;
+													}
+												</style>
+												<div><!--44434-->	
+
+
+
+
+<!--BLP-SHORTCODE-BEGIN--><!-- entering /wp-content/themes/plain-child/blueprint/shortcode-output/query/query_wordpress.php-->
+<!-- exiting  /wp-content/themes/plain-child/blueprint/shortcode-output/query/query_wordpress.php-->
+
+
+
+<!--blp:query shortcode:  function:blp_query_wordpress This shortcode was in post with the id 14656 -->
+
+<div style='margin-top:-50px;position:absolute' id='related-posts'><a name='related-posts'></a></div><div style="clear:both"></div><div class="vc_row wpb_row vc_row-fluid wt_main_row wt_row_default" style="background-color:white;padding-top:0px;padding-bottom:0.024px;"><!--div 1-->
+
+
+			
+
+
+			<div class="wpb_column vc_column_container vc_col-md-12"><!--div 4-->
+			<div class="vc_column-inner "><!--div 5-->
+			<div class="wpb_wrapper"><!--div 6-->
+			
+				<script>
+				if ( blp_cancelWowEffect || blp_isSafari ) { // blp_isSafari vars comes from the global js variable defined at blp-js-library.js
+				} else {
+					document.write ('<div class="plain-animation wow fadeInUpQuick" data-wow-delay="0.5s">');
+				}
+				</script>
+
+					<h1 class="section-title" >
+						
+						<p><b>Related Suggestions</b><br>						<!-- &blp_id=related-posts -->											</h1>
+
+				<script>
+				if ( blp_cancelWowEffect || blp_isSafari ) { // blp_isSafari vars comes from the global js variable defined at blp-js-library.js
+				} else {
+					document.write ('</div>');
+				}
+				</script>
+
+					<!--no tags--><!--no tags--><!--blp:paging is not asked for $the_blp_id related-posts--><div style="max-height:400px;overflow:hidden"><div class="owl-carousel owl-theme instance-related-posts" ><!--<div class="item"  >-->
+
+
+<!--blp:cell-cell:cell-cell-owl-related.php-->
+
+
+
+<div class="item" >
+	
+	<div class='owl-related'>
+	
+		<!--<center>-->
+
+			<a href='https://www.islamicity.org/4242/do-not-mock-backbit-or-lie-about-others/'><img style="border-radius: 3px;" class="owl-small" src="https://www.islamicity.org/wp-content/plugins/blueprint-timthumb/timthumb.php?src=/global/images/photo/IC-Articles/shhhhhbw__1024x669.JPG&w=500&h=281&q=100" alt="" /></a>
+		
+			Do not mock, backbit or lie about others			
+		<!--</center>-->
+		
+	</div> <!-- CLOSES <div class='owl-related'> -->
+	
+</div> <!-- CLOSES <div class="item" > -->
+
+
+
+
+<!--</div>--></div></div><!--closes the instance for this carousel & and max-height wrapper--><script>
+				jQuery('.instance-related-posts').owlCarousel({
+					margin:12, autoWidth: true, items: 3, loop:true, nav:true, dots:false,stagePadding: 150,margin:10,				})
+		</script>
+			</div><!--6-->
+			</div><!--5-->
+			</div><!--4-->
+
+			
+			</div><!--1-->
+
+			<!--if parallax background is passed, honor it! -->
+
+
+<!--BLP-SHORTCODE-END-->
+
+</div><a name='disclaimer'>&nbsp;</a><br><a name='respond'></a><div style="clear:both;margin-top:20px;"></div><!--this allows us disqus icon internal anchor to scroll properly.-->                                    <div class="su-spoiler su-spoiler-style-fancy su-spoiler-icon-plus su-spoiler-closed" data-scroll-offset="0" data-anchor-in-url="no"><div class="su-spoiler-title" tabindex="0" role="button"><span class="su-spoiler-icon"></span>COMMENTS DISCLAIMER & RULES OF ENGAGEMENT</div><div class="su-spoiler-content su-u-clearfix su-u-trim">
+                                        The opinions expressed herein, through this post or comments, contain positions and viewpoints that are not necessarily those of IslamiCity. These are offered as a means for IslamiCity to stimulate dialogue and discussion in our continuing mission of being an educational organization.
+                                        The IslamiCity site may occasionally contain copyrighted material the use of which may not always have been specifically authorized by the copyright owner. IslamiCity is making such material available in its effort to advance understanding of humanitarian, education, democracy, and social justice issues, etc. We believe this constitutes a 'fair use' of any such copyrighted material as provided for in section 107 of the US Copyright Law. <p><br>In accordance with Title 17 U.S.C. Section 107, and such (and all) material on this site is distributed without profit to those who have expressed a prior interest in receiving the included information for research and educational purposes.
+                                    </div></div>
+										<div id="disqus_thread"></div>
+										<script>
+											/**
+											 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT
+											 *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR
+											 *  PLATFORM OR CMS.
+											 *
+											 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:
+											 *  https://disqus.com/admin/universalcode/#configuration-variables
+											 */
+
+											var disqus_config = function () {
+												// Replace PAGE_URL with your page's canonical URL variable
+												this.page.url = 'https://www.islamicity.org/14656/spreading-rumors-and-suspicions/' ;
+
+												// Replace PAGE_IDENTIFIER with your page's unique identifier variable
+												this.page.identifier = 'https://www.islamicity.org/14656/spreading-rumors-and-suspicions/';
+											};
+
+
+											(function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+												var d = document, s = d.createElement('script');
+
+												// IMPORTANT: Replace EXAMPLE with your forum shortname!
+												s.src = 'https://islamicity-org.disqus.com/embed.js';
+
+												s.setAttribute('data-timestamp', +new Date());
+												(d.head || d.body).appendChild(s);
+											})();
+										</script>
+										<noscript>
+											Please enable JavaScript to view the
+											<a href="https://disqus.com/?ref_noscript" rel="nofollow">
+												comments powered by Disqus.
+											</a>
+										</noscript>
+
+
+										</div><!--afterpostbody--></div>
+						
+
+
+
+
+
+						</div>
+					</div><!-- .entry-content -->
+
+					<footer class="entry-footer clearfix">
+											</footer><!-- .entry-footer -->
+
+
+
+
+					
+							<script>
+
+								//mhk hack - this is in use content-mhk-disqus.php
+
+								var lastScrollTop = window.pageYOffset;
+								//var manualScrollingHasStarted = false;
+								//alert('lastScrollTop:' + lastScrollTop);
+
+								jQuery( document ).ready(function() {
+
+									// element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
+									// ##scroll ##onscroll  ##windowonscroll
+									window.addEventListener("scroll", function(){ // or window.addEventListener("scroll"....
+
+
+										//if ( !manualScrollingHasStarted ) {
+											//return false;
+										//}
+
+
+
+										var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+										if (st > lastScrollTop && st > 100){
+											// downscroll code
+
+											//<a href="#" class="open-search"><i id="site_search-magnifier" style="font-size:20px" class="fa fa-search"></i></a>
+											//newHaluk
+											if ( false ) {
+												if ( MHK ) {
+													jQuery('#menu-main-menu').css('display','none');
+													if ( st == 0) {
+														jQuery('#menu-main-menu').css('display','block');
+													}
+												}
+											}
+
+
+
+											jQuery('.logo-menu').addClass('let-header-disappear');
+											jQuery('.logo-menu').removeClass('let-header-reappear');
+
+											//$('#bigresult').removeClass('blur');
+											//$('#bigresult').addClass('unblur');
+
+
+										} else {
+											jQuery('.logo-menu').addClass('let-header-reappear');
+											jQuery('.logo-menu').removeClass('let-header-disappear');
+
+											//$('#bigresult').addClass('blur');
+											//$('#bigresult').removeClass('unblur');
+										}
+										lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+									}, false);
+
+
+								});
+
+
+							</script>
+
+							<style>
+
+								#socials {
+									width: 50px;
+									position: absolute;
+									left: 4px !important;
+									top: 28px;
+								}
+
+								.social-spacer {
+									height:5px;
+								}
+
+								.postbody{
+									padding-left: 30px;
+									text-align: left;
+								}
+
+								#socials-container {
+									position: sticky; /* see js how it ads webkit-sticky for safari  */
+									top: 160px;
+									margin-left: -28px !important;
+									display:block;
+									z-index:99999999;
+								}
+
+
+								.side-social-share-icons {
+									width: 63%;
+								}
+
+								/*indent the comments */
+								.commentlist .comment_content {
+									padding-left: 30px;
+								}
+							</style>
+
+
+
+							<style>
+
+								.let-header-disappear {
+									visibility:hidden;
+									opacity:0;
+									transition:visibility 0.7s linear,opacity 0.7s linear;
+								}
+
+								.let-header-reappear {
+									visibility:visible;
+									opacity:1;
+									transition:visibility 0.3s linear,opacity 0.3s linear;
+								}
+
+
+								blockquote p {
+									font-family: Georgia !important;
+									font-style: italic !important;
+									font-size: 25px !important;
+									background-color: aliceblue !important;
+									line-height: 44px !important;
+									padding: 15px;
+								}
+
+
+								.postbody h2, h3, h4 {
+									font-family: 'Roboto', sans-serif;
+									color: rgb(40, 40, 40);
+									font-size: larger;
+									padding-left: 17%;
+								}
+
+								/*
+								https://www.islamicity.org/3631/significance-of-bismillah/?ft=1&newlook=1&disqus=1
+								https://www.islamicity.org/15288/discovering-prayer-and-the-love-of-god-in-islam/?ft=1&newlook=1&disqus=1
+								*/
+
+								@media only screen and (max-width: 767px) and (min-width: 401px) {
+									/*
+									.navbar-plain .navbar-nav > li > a {
+										font-size: 1.4vw;
+									}
+									*/
+									.postbody {
+
+
+									}
+								}
+
+
+								.share-your-selection {
+									background-color: #a79068;
+									font-size: 12px;
+									color: white;
+									text-align: center;
+								}
+
+
+								@media only screen and (min-width: 768px) {  /* used to be 801 */
+
+									.afterpostbody {
+										padding-left:10%;
+										padding-right:10%;
+										padding-top:10px;
+										padding-bottom:10px;
+
+									}
+
+									/*moves the faith towards the left closer to ic logo, otherwise it is to far! */
+									.navbar-right {
+										float: right!important;
+										margin-right: 57px;
+									}
+
+									blockquote {
+										border-left: 0px solid #aaa !important;
+									}
+
+									blockquote p {
+										font-family: Georgia !important;
+										font-style: italic !important;
+										font-size: 21px !important;
+										background-color: aliceblue !important;
+										line-height: 44px !important;
+										padding-left: 5%;
+										padding-right: 10%;
+
+									}
+
+
+
+									.postbody  p {
+										/*
+										padding-left: 10%;
+										padding-right: 23%;
+										margin-bottom: 25px;
+    									margin-top: 50px;
+										*/
+										padding-left: 17%;
+										padding-right: 28%;
+										/*
+										margin-bottom: 25px;
+										margin-top: 50px;
+										*/
+										margin-bottom: 40px !important;
+    									margin-top: 20px;
+									}
+
+									.postbody  ol, ul {
+										margin-top: 42px;
+										margin-bottom: 10px;
+									}
+
+									/* ### */
+									.postbody > p:nth-child(-n+1) {
+										color: rgb(109, 92, 10);
+										line-height: 1.5;
+										font-size: x-large !important;
+										padding-left: 70px;
+										padding-right: 70px;
+										opacity:0.7;
+										background-color: #e9e3da36;
+
+									}
+
+									.postbody > p:first-child:first-letter {
+									color: #903;
+									float: left;
+									/*font-size: 75px;*/
+									font-size: 4.5em;
+									line-height: 60px;
+									padding-top: 4px;
+									padding-right: 8px;
+									padding-left: 3px;
+									text-align:justify;
+										/*margin-top: .15em;*/
+									}
+
+									.postbody {
+										--x-height-multiplier: 0.375 !important;
+										--baseline-multiplier: 0.17 !important;
+										font-size: 20px !important;
+										font-family: arial;
+										letter-spacing: .015rem !important;
+										font-weight: 400 !important;
+										font-style: normal !important;
+										line-height: 1.48 !important;
+										letter-spacing: -.003em;
+										/*
+										padding-left: 13% !important;
+										padding-right: 3% !important;
+										*/
+										padding-left: 5% !important;
+										padding-right: 0% !important;
+
+									}
+
+									.postbody > p {
+										/*margin-bottom:50px;*/
+										margin-bottom:0px;
+										/*color: rgb(126, 97, 51);*/
+										color:rgb(0, 0, 0, 0.84);
+										/*line-height:1.8 !important;*/
+										line-height:1.5 !important;
+									}
+
+									#socials-container { /*this has to be done with media query... */
+										margin-left: 2.5em !important;
+									}
+
+
+
+									.blog-title {
+										font-size: 44px !important;
+									}
+
+
+
+								}
+
+								@media only screen and (max-width: 1200px) {
+									.postbody > p {
+										
+									}
+								}
+								@media only screen and (max-width: 992px) {
+									.postbody > p {
+										
+									}
+								}
+
+								@media only screen and (max-width: 768px) {
+									.postbody > p {
+										margin-bottom:50px;
+										color:rgb(0, 0, 0, 0.84);
+										/*line-height:1.8 !important;*/
+										line-height:1.5 !important;
+
+									}
+								}
+
+								@media only screen and (max-width: 400px) {
+
+									.postbody {
+										padding-left: 13% !important;
+									}
+
+									.postbody h2, h3, h4 {
+										padding-left: 0%;
+									}
+
+
+
+
+
+									.postbody > p {
+										color: rgb(20, 20, 20);
+										font-weight: 400;
+										font-family: sans-serif;
+										line-height: 1.58;
+										font-size: 17px;
+										/*margin-bottom: 48px;*/
+										margin-bottom: 30px;
+										color: rgb(0, 0, 0, 0.80);
+										line-height: 1.72 !important;
+										text-align: left;
+									}
+
+
+									blockquote p {
+										font-size: 17px !important;
+										line-height: 30px !important;
+									}
+
+
+
+
+
+									.postbody {
+										/*padding-left: 9% !important;*/
+										/*padding-right: 0% !important;*/
+									}
+
+									.legacy-comments {
+										margin-top:10px;
+									}
+
+								}
+								/* move the category stuff towards the end!  */
+
+								/* another killer idea: change the menu per article! */
+
+								/* also remove the sidebar and make primary bigger*/
+								#secondary {
+									display:none;
+								}
+
+								/*when par=1 is in, index.php caching will change #primary md-8 to md-10 */
+
+								/*
+								<div id="primary" class="content-area col-md-8" style="background: white;text-align: justify;padding-left: 20px;padding-right: 20px;">
+								*/
+
+								#socials-container {
+									/*margin-left: -7px !important;*/
+									margin-left: -13px !important;
+								}
+
+															</style>
+							
+
+					<!--at this time we are done with the article context! -->
+					<!--if a col-lg-8 opened earlier, it needs to close! -->
+
+
+
+			
+
+		</div><!-- main-content-area -->
+
+	</div><!-- content-and-image -->
+
+</article><!-- #post-## -->
+
+
+	<!--<a href="https://web.whatsapp.com/send?text=textToshare" target="_blank">Share via Whatsapp</a>-->
+	<!--<script src="/wp-content/plugins/blueprint/playground/share-this/share-this.js?v=1"></script>-->
+	<script>
+		!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e=e||self).ShareThis=t()}(this,function(){"use strict";var e;function t(t,n){return e||(e=function(e){for(var t="atchesSelector",n=0,r=["matches","m"+t,"webkitM"+t,"mozM"+t,"msM"+t,"oM"+t];n<r.length;n++){var o=r[n];if(e[o])return o}}(t)),t[e](n)}function n(e,n){for(var r=e;r&&(1!==r.nodeType||!t(r,n));)r=r.parentNode;return r}function r(e){return"function"==typeof e}function o(e,t,n){var r=n.document,o=r.defaultView,i=function(e){if(e.isCollapsed)return!0;var t=e.anchorNode.compareDocumentPosition(e.focusNode);return t?(4&t)>0:e.anchorOffset<e.focusOffset}(o.getSelection()),a=function(e,t){var n,r=e.getClientRects(),o=[].slice.bind(r);if(t){for(var i=1/0,a=r.length;a--;){var c=r[a];if(c.left>i)break;i=c.left}n=o(a+1)}else{for(var u=-1/0,f=0;f<r.length;f++){var s=r[f];if(s.right<u)break;u=s.right}n=o(0,f)}return{top:Math.min.apply(Math,n.map(function(e){return e.top})),bottom:Math.max.apply(Math,n.map(function(e){return e.bottom})),left:n[0].left,right:n[n.length-1].right}}(t,i),c=function(e){var t=e.document.body;return("static"===e.getComputedStyle(t).position?t.parentNode:t).getBoundingClientRect()}(o),u=e.style;i?u.right=r.documentElement.clientWidth-a.right+c.left+"px":u.left=a.left-c.left+"px",u.width=a.right-a.left+"px",u.height=a.bottom-a.top+"px",u.top=a.top-c.top+"px",u.position="absolute",e.className=n.popoverClass}var i="data-share-via";function a(e){return{createPopover:function(){var t=e.createElement("div");return t.addEventListener("click",function(e){!function(e,t){var o=n(t.target,"["+i+"]");if(o){var a=function(e,t){for(var n=0;n<e.length;n++){var r=e[n];if(r.name===t)return r}}(e,o.getAttribute(i));a&&r(a.action)&&a.action(t,o)}}(this.sharers,e)}),t},attachPopover:function(t){e.body.appendChild(t)},removePopover:function(e){var t=e.parentNode;t&&t.removeChild(e)}}}var c,u=function(e,t,n,r){var o=e.shareUrl||e.document.defaultView.location;return"<ul>"+t.map(function(e){return'<li data-share-via="'+e.name+'">'+e.render.call(e,n,r,o)+"</li>"}).join("")+"</ul><div class='share-your-selection'>SHARE YOUR SELECTION</div>"},f=["selectionchange","mouseup","touchend","touchcancel"];return function(e){var t=(Object.assign||function(e,t){if(t&&"object"==typeof t)for(var n in t)e[n]=t[n];return e})({document:document,selector:"body",sharers:[],popoverClass:"share-this-popover",transformer:function(e){return e.trim().replace(/\s+/g," ")}},e||{}),i=!1,s=!1,l=c,p=c,d=c,v=c;return{init:function(){return!i&&(l=t.document,(p=l.defaultView).getSelection?(f.forEach(h),p.addEventListener("resize",g),v=a(l),i=!0):(console.warn("share-this: Selection API isn't supported"),!1))},destroy:function(){return!(!i||s)&&(f.forEach(m),p.removeEventListener("resize",g),C(),l=c,p=c,s=!0)},reposition:function(){return d&&o(d,y(),t),!!d}};function h(e){l.addEventListener(e,b)}function m(e){l.removeEventListener(e,b)}function g(){d&&o(d,y(),t)}function b(e){var n=e.type;!d!=("selectionchange"===n)&&setTimeout(function(){if(p){var e=y();e?function(e){var n=!d,i=e.toString(),a=t.transformer(i),f=t.sharers.filter(function(e,t,n){var o=n.active;return r(o)?o(e,t):o===c||o}.bind(null,a,i));f.length?(n&&(d=v.createPopover()),d.sharers=f,d.innerHTML=u(t,f,a,i),o(d,e,t),n&&(v.attachPopover(d),r(t.onOpen)&&t.onOpen(d,a,i))):d&&C()}(e):C()}},10)}function y(){var e=p.getSelection(),r=e.rangeCount&&e.getRangeAt(0);if(r){var o=function(e,t){var r=e.cloneRange();if(e.collapsed||!t)return r;var o=n(e.startContainer,t);return o?function(e,t){var n=e.compareDocumentPosition(t);return!n||(16&n)>0}(o,e.endContainer)||r.setEnd(o,o.childNodes.length):(o=n(e.endContainer,t))?r.setStart(o,0):r.collapse(),r}(r,t.selector);if(!o.collapsed&&o.getClientRects().length)return o}}function C(){d&&(v.removePopover(d),d=c,r(t.onClose)&&t.onClose())}}});
+//# sourceMappingURL=share-this.js.map
+
+	</script>
+	<script src="/wp-content/plugins/blueprint/playground/share-this/sharers/twitter.js?v=2"></script>
+	<script src="/wp-content/plugins/blueprint/playground/share-this/sharers/facebook.js?v=3"></script>
+	<script>
+		!function(e,o){"object"==typeof exports&&"undefined"!=typeof module?o(exports):"function"==typeof define&&define.amd?define(["exports"],o):o(e.ShareThisViaWhatsApp=e.ShareThisViaWhatsApp||{})}(this,function(e){"use strict";function o(e,o,n){return'<a href="'+this.getShareUrl(e,n)+'" target="_blank" rel="noopener nofollow noreferrer"><img src=https://icons.iconarchive.com/icons/dtafalonso/android-l/48/WhatsApp-icon.png></a>'}function n(e,o){return"https://web.whatsapp.com/send?text="+encodeURIComponent(e)+" -- read more:  "+encodeURIComponent(document.URL) + "&u="+encodeURIComponent(o)}function t(e,o){e.preventDefault(),o.ownerDocument.defaultView.open(o.firstChild.href,"share_via_whatsapp","height=440,location=no,menubar=no,scrollbars=no,status=no,toolbar=no,width=640").opener=null}e.render=o,e.getShareUrl=n,e.action=t,e.name="whatsapp",Object.defineProperty(e,"__esModule",{value:!0})});
+	</script> <!-- http://www.iconarchive.com/show/circle-addon1-icons-by-martz90/reddit-icon.html -->
+
+	<!--<script src="/wp-content/plugins/blueprint/playground/share-this/sharers/reddit.js?v=3"></script>-->
+	<!--<script src="/wp-content/plugins/blueprint/playground/share-this/sharers/speakers.js?v=1"></script>-->
+	<script src="/wp-content/plugins/blueprint/playground/share-this/sharers/notes.js?v=3"></script>
+
+	<!--
+	<script src="https://maxart2501.github.io/share-this/dist/sharers/reddit.js"></script>
+	<script src="https://maxart2501.github.io/share-this/dist/sharers/speakers.js"></script>
+	<script src="https://maxart2501.github.io/share-this/dist/sharers/notes.js"></script>
+	-->
+
+	<script>
+		/*
+		ShareThis({
+			sharers: [ ShareThisViaTwitter,  ShareThisViaFacebook, ShareThisViaWhatsApp, ShareThisViaNotes, ShareThisViaSpeakers ],
+			selector: "article"
+		}).init();
+		*/
+
+		if ( webView ) {
+			// nada!
+		} else {
+			ShareThis({
+				sharers: [ ShareThisViaTwitter,  ShareThisViaFacebook, ShareThisViaWhatsApp ],
+				selector: "article"
+			}).init();
+
+		}
+
+
+	</script>
+
+
+
+
+
+					
+
+
+					</main><!-- #main -->
+
+
+
+				 </div><!-- #primary -->
+
+	
+				</div><!-- site-row row -->
+	</div><!-- #content -->
+	
+	
+	<script>
+		if ( webView  ) {
+			document.write ("<div style='display:none' >");
+		}
+	</script>
+
+	<footer id="footer" class="clearfix" style="background-color:black;">
+		<div id="copyright" style='margin-top:10px;'>
+			<div class="container">
+				<div class="row">
+
+
+				<div class="col-md-3 col-sm-12 copyright">
+					<span style="font-size:11px;">
+						<img style="width:120px;opacity:0.9;" src='/wp-content/themes/plain-child/images/footer-logo.png'>
+					</span>
+
+					<!-- Amr November 8 2021 -->
+					<br>
+					<div>
+									<a href="https://www.facebook.com/islamicity" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+										<i class="fa fa-facebook" style="display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right: 10px;color: white;opacity: 0.7;"></i>
+									</a>
+
+									<a href="https://twitter.com/islamicity" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+										<i class="fa fa-twitter" style="display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right: 10px;color: white;opacity: 0.8;"></i>
+									</a>
+
+									<a href="https://www.youtube.com/user/islamicitytv" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+										<i class="fa fa-youtube-play" style="display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right: 10px;color: white;opacity: 0.8;"></i>
+									</a>
+
+									<a href="https://www.pinterest.com/islamicity/" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+										<i class="fa fa-pinterest" style="display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right: 10px;color: white;opacity: 0.8;"></i>
+									</a>
+
+									<a href="https://instagram.com/islamicity/" class="social-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">
+										<i class="fa fa-instagram" style="display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:0px;color: white;opacity: 0.8;"></i>
+									</a>
+
+					</div>
+					<!-- End Amr November 8 2021 -->
+				</div>
+
+				<div class="col-md-9 col-sm-12 attribution">
+					<span class="toggle-sidebar2" style="font-size:12px;color:gray;">
+
+						<a style='cursor:pointer;color:white' href='/about-islamicity'>About Us</a> |
+
+						<a style='cursor:pointer;color:white' href='/contribute/'>Submit Content</a> |
+
+						<a style='cursor:pointer;color:white' href='/bulletin/'>Newsletter</a> |
+
+						<a style='cursor:pointer;color:white' href='/sponsorship'>Sponsorship Ads</a> |
+
+
+						<a style='cursor:pointer;color:white' href='/privacy-policy'>Privacy Policy</a> |
+
+						<a style='cursor:pointer;color:white' href='/Feedback/'>Contact Us</a>
+
+					</span>
+				</div>
+				<div class="col-sm-12 attribution">
+					<br><span style="font-size:11px;margin-top:-35px;display:block;">
+					© 1995 - 2023 IslamiCity. All Rights Reserved
+					</span>
+					<br><span style="display:block;margin-top:-35px;color:gray;font-size:10px;">
+						IslamiCity ™ is a registered trademark of HADI, a nonprofit 501 (c)(3) organization. (EIN: 95-4348674)
+					</span>
+				</div>
+					<!--
+					<div class="col-md-12">
+						<center>
+							<span style="font-size:13px;">
+								© 1995 - 2021 IslamiCity. All Rights Reserved
+							</span><br>
+							<span style="font-size:10px;color:gray;margin-top:-10px;display:block;">
+								IslamiCity ™ is a registered trademark of HADI, a nonprofit 501 (c)(3) organization.
+							</span>
+						</center>
+					</div>
+
+					<div class="col-md-12 ">
+						<center>
+
+							<span class="toggle-sidebar2" style="font-size:12px;color:gray;">
+
+								<a style='cursor:pointer;color:white' href='http://www.i s l a m i c i t y .org/about-islamicity'>About Us</a> |
+
+								<a style='cursor:pointer;color:white' href='http://www.i s l a m i c i t y .org/contribute/'>Contribute</a> |
+
+								<a style='cursor:pointer;color:white' href='http://www.islamicity.com/bulletin/'>Newsletter</a> |
+
+								<a style='cursor:pointer;color:white' href='/sponsorship/'>Sponsorsip Ads</a> |
+
+
+								<a style='cursor:pointer;color:white' href='http://www.i s l a m i c i t y .org/privacy-policy'>Privacy Policy</a> |
+
+								<a style='cursor:pointer;color:white' href='http://www.i s l a m i c i t y .org/Feedback/'>Contact Us</a>
+
+							</span>
+						</center>
+
+					</div>
+
+					-->
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		if ( webView  ) {
+			document.write ("</div>");
+		}
+	</script>
+
+
+
+</div><!-- #page -->
+
+
+
+
+
+<script type="text/javascript">
+const wpvViewHead = document.getElementsByTagName( "head" )[ 0 ];
+const wpvViewExtraCss = document.createElement( "style" );
+wpvViewExtraCss.textContent = '<!--[if IE 7]><style>.wpv-pagination { *zoom: 1; }</style><![endif]-->';
+wpvViewHead.appendChild( wpvViewExtraCss );
+</script>
+
+<script type="text/javascript">
+const wpvCtHead = document.getElementsByTagName( "head" )[ 0 ];
+const wpvCtExtraCss = document.createElement( "style" );
+wpvCtExtraCss.textContent = '/* ----------------------------------------- *//* Content Template: post-content - start *//* ----------------------------------------- */.imagecaption{  font-size:80%;  color:grey;  margin-top: -10px;  margin-bottom: -10px;}.taxonomypostcontent {    background-color: #ffffff;        padding: 10px;    margin: 0px;    border: 1px solid navy;    border-color:#dddddd;   -webkit-border-radius: 2px;   -moz-border-radius: 2px;    border-radius: 2px;}.thumbnailpostcontent {   border-radius:2px !important; }.postbody a {  text-decoration: none !important;  color:#248cc8 !important;}/* ----------------------------------------- *//* Content Template: post-content - end *//* ----------------------------------------- */';
+wpvCtHead.appendChild( wpvCtExtraCss );
+</script>
+
+<!-- GTM Container placement set to footer -->
+<!-- Google Tag Manager (noscript) -->
+				<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQZVM4S" height="0" width="0" style="display:none;visibility:hidden" aria-hidden="true"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --><a href="#" class="wpb_scroll_top scroll-top"><i class="fa fa-angle-up fa-2x"></i></a>    <!-- Meta Pixel Event Code -->
+    <script type='text/javascript'>
+        document.addEventListener( 'wpcf7mailsent', function( event ) {
+        if( "fb_pxl_code" in event.detail.apiResponse){
+          eval(event.detail.apiResponse.fb_pxl_code);
+        }
+      }, false );
+    </script>
+    <!-- End Meta Pixel Event Code -->
+    <div id='fb-pxl-ajax-code'></div><!-- This site is converting visitors into subscribers and customers with IslamiCity - https://islamicity.optinforms.com :: Campaign Title: Palestine Emergency 2023 -->
+<script>(function(d,u,ac){var s=d.createElement('script');s.type='text/javascript';s.src='https://a.omappapi.com/app/js/api.min.js';s.async=true;s.dataset.user=u;s.dataset.campaign=ac;d.getElementsByTagName('head')[0].appendChild(s);})(document,112705,'a0e2e3jgvglu3f8troba');</script>
+<!-- / IslamiCity --><script type="text/javascript">/* <![CDATA[ */ jQuery(document).ready( function() { jQuery.post( "https://www.islamicity.org/wp-admin/admin-ajax.php", { action : "entry_views", _ajax_nonce : "e66fb7c48f", post_id : 14656 } ); } ); /* ]]> */</script>
+		<script type="text/javascript">
+		var a0e2e3jgvglu3f8troba_shortcode = true;		</script>
+		<link rel='stylesheet' id='so-css-plain-css' href='https://www.islamicity.org/wp-content/uploads/so-css/so-css-plain.css?ver=1612219561' type='text/css' media='all' />
+<link rel='stylesheet' id='su-icons-css' href='https://www.islamicity.org/wp-content/plugins/shortcodes-ultimate/includes/css/icons.css?ver=1.1.5' type='text/css' media='all' />
+<link rel='stylesheet' id='su-shortcodes-css' href='https://www.islamicity.org/wp-content/plugins/shortcodes-ultimate/includes/css/shortcodes.css?ver=5.13.2' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/ui/tooltip.min.js?ver=1.13.2' id='jquery-ui-tooltip-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/streamweasels-youtube-integration-paid/public/dist/slick.min.js?ver=1.1.7' id='streamweasels-youtube-slickjs-js'></script>
+<script id="streamweasels-youtube-js-before" type="text/javascript">
+const streamWeaselsYouTubeVars = {"ajaxUrl":"https:\/\/www.islamicity.org\/wp-admin\/admin-ajax.php","thumbnail":"https:\/\/www.islamicity.org\/wp-content\/plugins\/streamweasels-youtube-integration-paid\/public\/img\/sw-blank.png","APIUrl":"https:\/\/www.islamicity.org\/wp-content\/plugins\/streamweasels-youtube-integration-paid\/public\/..\/includes\/streamweasels-youtube-operational-api.php","YouTubeAPIkey":"AIzaSyD8Iho2z5gVIbQIwRSVCgjFFBXmDxeBbbE","cacheData":""}
+const streamWeaselsYouTubeVars = {"ajaxUrl":"https:\/\/www.islamicity.org\/wp-admin\/admin-ajax.php","thumbnail":"https:\/\/www.islamicity.org\/wp-content\/plugins\/streamweasels-youtube-integration-paid\/public\/img\/sw-blank.png","APIUrl":"https:\/\/www.islamicity.org\/wp-content\/plugins\/streamweasels-youtube-integration-paid\/public\/..\/includes\/streamweasels-youtube-operational-api.php","YouTubeAPIkey":"AIzaSyD8Iho2z5gVIbQIwRSVCgjFFBXmDxeBbbE","cacheData":""}
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/streamweasels-youtube-integration-paid/public/dist/streamweasels-youtube-public.min.js?ver=1.1.7' id='streamweasels-youtube-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=5.8.2' id='swv-js'></script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/www.islamicity.org\/wp-json\/","namespace":"contact-form-7\/v1"}};
+var wpcf7 = {"api":{"root":"https:\/\/www.islamicity.org\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.8.2' id='contact-form-7-js'></script>
+<script type='text/javascript' id='toc-front-js-extra'>
+/* <![CDATA[ */
+var tocplus = {"smooth_scroll":"1","visibility_show":"show","visibility_hide":"hide","width":"100%","smooth_scroll_offset":"67"};
+var tocplus = {"smooth_scroll":"1","visibility_show":"show","visibility_hide":"hide","width":"100%","smooth_scroll_offset":"67"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/table-of-contents-plus/front.min.js?ver=2309' id='toc-front-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/duracelltomi-google-tag-manager/js/gtm4wp-contact-form-7-tracker.js?ver=1.18.1' id='gtm4wp-contact-form-7-tracker-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/duracelltomi-google-tag-manager/js/gtm4wp-form-move-tracker.js?ver=1.18.1' id='gtm4wp-form-move-tracker-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/cred-frontend-editor/vendor/toolset/toolset-common/res/lib/bootstrap3/js/bootstrap.min.js?ver=3.3.7' id='toolset_bootstrap-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.13.2' id='jquery-ui-datepicker-js'></script>
+<script id="jquery-ui-datepicker-js-after" type="text/javascript">
+jQuery(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Close","currentText":"Today","monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Previous","dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"dateFormat":"MM d, yy","firstDay":1,"isRTL":false});});
+jQuery(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Close","currentText":"Today","monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Previous","dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"dateFormat":"MM d, yy","firstDay":1,"isRTL":false});});
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/underscore.min.js?ver=1.13.4' id='underscore-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/suggest.min.js?ver=1.1-20110113' id='suggest-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/cred-frontend-editor/vendor/toolset/toolset-common/toolset-forms/js/main.js?ver=0.1.2' id='wptoolset-forms-js'></script>
+<script type='text/javascript' id='wptoolset-field-date-js-extra'>
+/* <![CDATA[ */
+var wptDateData = {"buttonImage":"https:\/\/www.islamicity.org\/wp-content\/plugins\/cred-frontend-editor\/vendor\/toolset\/toolset-common\/toolset-forms\/images\/calendar.gif","buttonText":"Select date","dateFormat":"MM d, yy","dateFormatPhp":"F j, Y","dateFormatNote":"Input format: F j, Y","yearMin":"1583","yearMax":"3000","ajaxurl":"https:\/\/www.islamicity.org\/wp-admin\/admin-ajax.php","readonly":"This is a read-only date input","readonly_image":"https:\/\/www.islamicity.org\/wp-content\/plugins\/cred-frontend-editor\/vendor\/toolset\/toolset-common\/toolset-forms\/images\/calendar-readonly.gif","datepicker_style_url":"https:\/\/www.islamicity.org\/wp-content\/plugins\/cred-frontend-editor\/vendor\/toolset\/toolset-common\/toolset-forms\/css\/wpt-jquery-ui\/jquery-ui-1.11.4.custom.css"};
+var wptDateData = {"buttonImage":"https:\/\/www.islamicity.org\/wp-content\/plugins\/cred-frontend-editor\/vendor\/toolset\/toolset-common\/toolset-forms\/images\/calendar.gif","buttonText":"Select date","dateFormat":"MM d, yy","dateFormatPhp":"F j, Y","dateFormatNote":"Input format: F j, Y","yearMin":"1583","yearMax":"3000","ajaxurl":"https:\/\/www.islamicity.org\/wp-admin\/admin-ajax.php","readonly":"This is a read-only date input","readonly_image":"https:\/\/www.islamicity.org\/wp-content\/plugins\/cred-frontend-editor\/vendor\/toolset\/toolset-common\/toolset-forms\/images\/calendar-readonly.gif","datepicker_style_url":"https:\/\/www.islamicity.org\/wp-content\/plugins\/cred-frontend-editor\/vendor\/toolset\/toolset-common\/toolset-forms\/css\/wpt-jquery-ui\/jquery-ui-1.11.4.custom.css"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/cred-frontend-editor/vendor/toolset/toolset-common/toolset-forms/js/date.js?ver=0.1.2' id='wptoolset-field-date-js'></script>
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?libraries=places&ver=3.5.2' id='google-maps-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/wp-views/embedded/res/js/jquery.wpvmap.js?ver=3.6.8' id='views-map-script-js'></script>
+<script>(function(d){var s=d.createElement("script");s.type="text/javascript";s.src="https://a.omappapi.com/app/js/api.min.js";s.async=true;s.id="omapi-script";d.getElementsByTagName("head")[0].appendChild(s);})(document);</script><script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/bootstrap.min.js?ver=3.3.1' id='plain-bootstrap-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/jquery.mixitup.js?ver=2.1.6' id='plain-mixitup-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/wow.js?ver=1.0' id='plain-wow-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/placeholdem.min.js?ver=1.0' id='plain-placeholdem-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/jquery.vide.js?ver=1.0' id='plain-vide-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/smooth-scroll.js?ver=1.0' id='plain-smooth-scroll-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/waypoints.min.js?ver=1.0' id='plain-waypoints-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/jquery.counterup.min.js?ver=1.0' id='plain-counterup-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/retina.min.js?ver=1.3.0' id='plain-retina-js-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/jquery.magnific-popup.min.js?ver=1.0' id='plain-magnific-popup-js-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/themes/plain/assets/js/main.js?ver=1.0' id='plain-main-js-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/comment-reply.min.js?ver=6.3.2' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://www.google.com/recaptcha/api.js?render=6Le3PRsaAAAAAKSHmnJWHRoV15qja7H2QVSjGpbs&#038;ver=3.0' id='google-recaptcha-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/dist/vendor/wp-polyfill-inert.min.js?ver=3.1.2' id='wp-polyfill-inert-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.11' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' id='wpcf7-recaptcha-js-extra'>
+/* <![CDATA[ */
+var wpcf7_recaptcha = {"sitekey":"6Le3PRsaAAAAAKSHmnJWHRoV15qja7H2QVSjGpbs","actions":{"homepage":"homepage","contactform":"contactform"}};
+var wpcf7_recaptcha = {"sitekey":"6Le3PRsaAAAAAKSHmnJWHRoV15qja7H2QVSjGpbs","actions":{"homepage":"homepage","contactform":"contactform"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/contact-form-7/modules/recaptcha/index.js?ver=5.8.2' id='wpcf7-recaptcha-js'></script>
+<script type='text/javascript' id='su-shortcodes-js-extra'>
+/* <![CDATA[ */
+var SUShortcodesL10n = {"noPreview":"This shortcode doesn't work in live preview. Please insert it into editor and preview on the site.","magnificPopup":{"close":"Close (Esc)","loading":"Loading...","prev":"Previous (Left arrow key)","next":"Next (Right arrow key)","counter":"%curr% of %total%","error":"Failed to load content. <a href=\"%url%\" target=\"_blank\"><u>Open link<\/u><\/a>"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/shortcodes-ultimate/includes/js/shortcodes/index.js?ver=5.13.2' id='su-shortcodes-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/optinmonster/assets/dist/js/helper.min.js?ver=2.14.1' id='optinmonster-wp-helper-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.2' id='jquery-ui-mouse-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.2' id='jquery-ui-slider-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/jquery/jquery.ui.touch-punch.js?ver=0.2.2' id='jquery-touch-punch-js'></script>
+<script id="mediaelement-core-js-before" type="text/javascript">
+var mejsL10n = {"language":"en","strings":{"mejs.download-file":"Download File","mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen":"Fullscreen","mejs.play":"Play","mejs.pause":"Pause","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.live-broadcast":"Live Broadcast","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/mediaelement/mediaelement-and-player.min.js?ver=4.2.17' id='mediaelement-core-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/mediaelement/mediaelement-migrate.min.js?ver=6.3.2' id='mediaelement-migrate-js'></script>
+<script type='text/javascript' id='mediaelement-js-extra'>
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive","audioShortcodeLibrary":"mediaelement","videoShortcodeLibrary":"mediaelement"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/mediaelement/wp-mediaelement.min.js?ver=6.3.2' id='wp-mediaelement-js'></script>
+<script type='text/javascript' id='wp-util-js-extra'>
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/wp-util.min.js?ver=6.3.2' id='wp-util-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/backbone.min.js?ver=1.4.1' id='backbone-js'></script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-includes/js/mediaelement/wp-playlist.min.js?ver=6.3.2' id='wp-playlist-js'></script>
+<script type='text/javascript' id='views-blocks-frontend-js-extra'>
+/* <![CDATA[ */
+var wpv_pagination_local = {"front_ajaxurl":"https:\/\/www.islamicity.org\/wp-admin\/admin-ajax.php","calendar_image":"https:\/\/www.islamicity.org\/wp-content\/plugins\/wp-views\/embedded\/res\/img\/calendar.gif","calendar_text":"Select date","datepicker_min_date":null,"datepicker_max_date":null,"datepicker_min_year":"1582","datepicker_max_year":"3000","resize_debounce_tolerance":"100","datepicker_style_url":"https:\/\/www.islamicity.org\/wp-content\/plugins\/cred-frontend-editor\/vendor\/toolset\/toolset-common\/toolset-forms\/css\/wpt-jquery-ui\/jquery-ui-1.11.4.custom.css","wpmlLang":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.islamicity.org/wp-content/plugins/wp-views/public/js/views-frontend.js?ver=3.6.8' id='views-blocks-frontend-js'></script>
+
+<script type="text/javascript">
+//-----------------------------------------
+// Content Template: post-content - start
+//-----------------------------------------
+soundManager.setup({
+url: '/wp-content/themes/plain-child/SoundManager/swf/',
+});
+
+
+//-----------------------------------------
+// Content Template: post-content - end
+//-----------------------------------------
+</script>
+		<script type="text/javascript">var omapi_localized = {
+			ajax: 'https://www.islamicity.org/wp-admin/admin-ajax.php?optin-monster-ajax-route=1',
+			nonce: '6f7a6edae8',
+			slugs:
+			{"a0e2e3jgvglu3f8troba":{"slug":"a0e2e3jgvglu3f8troba","mailpoet":false}}		};</script>
+				<script type="text/javascript">var omapi_data = {"object_id":14656,"object_key":"post","object_type":"post","term_ids":[2109,2104,2101,6076,7153,4993,6472],"wp_json":"https:\/\/www.islamicity.org\/wp-json","wc_active":false,"edd_active":false,"nonce":"bce4039262"};</script>
+		
+
+<!--the below stuf is invisible content , it ends with overwriting-scritps. js right before </body> -->
+
+
+
+
+
+
+<!--these scripts are needed for the onclick event on the ? icon -->
+<script type="text/javascript" src="https://www.islamicity.org/wp-content/themes/plain-child/blueprint/template-includes/joy-ride/jquery.cookie.js"></script>
+<script type="text/javascript" src="https://www.islamicity.org/wp-content/themes/plain-child/blueprint/template-includes/joy-ride/modernizr.mq.js"></script>
+<script type="text/javascript" src="https://www.islamicity.org/wp-content/themes/plain-child/blueprint/template-includes/joy-ride/jquery.joyride-2.1.js?ver=926169912"></script>
+
+
+
+<!-- Tip Content -->
+<ol id="joyRideTipContent">
+
+	<li data-id="logo" data-text="Next" data-options="tipLocation:left;tipAnimation:fade">
+
+		<h2>Welcome to the New IslamiCity</h2>
+
+			<br>
+			<p class='joyride-info'>We prepared this quick tour to help you get familiar with the new design so you find your way around the new site much quicker. <p class='joyride-info'>Let's begin. </p>
+		</li>
+
+	<li data-id="menu-icon" data-button="Next" data-options="tipLocation:right">
+
+		<h2>Topics Menu - Always one click away</h2>
+
+		<br>
+		<p class='joyride-info'>Topics menu will always be here, always within reach. <p class='joyride-info'>Here, you will find quick shortcuts to major topics & hubs under IslamiCity. <!--<i>from the most popular sections to the newest</i>. -->
+		</li>
+
+	<li data-id="site_search-magnifier" data-button="Next" data-options="tipLocation:left">
+
+		<h2>Site Search & Most Popular</h2>
+		<br>
+		<p class='joyride-info'>Site search is also one click away. <p class='joyride-info'>Here, you will also find the links to the most visited sections of IslamiCity, such as <i>Prayer times</i>, <i>Hijri Converter</i>, <i>Phonetic Search</i>, <i>Quran Section</i>, <i>IslamiCity Bazar</i> and more.
+		</li>
+
+	<li data-id="login_area" data-button="Next" >
+
+		<h2>Login & Login Status</h2>
+		<br>
+		<p class='joyride-info'>If you need a Login or Registeration, this is your starting point. <p class='joyride-info'>If you see a green icon like this (<i class="fa fa-user" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:0px;color:lightgreen;opacity:0.4;'></i>), it means you're already logged in! <p class='joyride-info'>But if you see, a red iconlike this (<i class="fa fa-user" style='display: inline-block;font-size: 19px;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;padding-right:0px;color:red;opacity:0.4;'></i>), it means you are NOT logged in. <p class='joyride-info'> It's all color coded. We'd love it if your icon is always green. It makes us a community.
+		</li>
+
+	<li data-id="menu-main-menu" data-button="Close">
+
+		<h2>Main Hubs & Home Pages</h2>
+		<p class='joyride-info'>Everything under IslamiCity is categorized under the major hubs you see in this panel. Due to overwhelming content, each of these hubs can be considered a home page of its own. <p class='joyride-info'><i>Faith</i> is where the tenets, pillars and spiruality related content is found. <p class='joyride-info'><i>Science</i> section features not just Science but also Nature and Technology. This section is more for the technologically minded. <p class='joyride-info'><i>World</i> section is for the News Buds. It covers day to day World Affairs, Politics & News. <p class='joyride-info'><i>Life</i> section is all about Society, Art, Culture, History, Sports, Food, Music and much more. <p class='joyride-info'><i>Values</i> section on the other hand is very special. We created it for only one thing in mind; to create a peaceful corner that features just inspiring and uplifting material, focused around <i>Universal Values</i> to be reflect upon -- <i>at a time never needed more desperately than now</i>
+		</li>
+
+	<li data-id="empty-div" data-button="Next" data-options="tipLocation:bottom;tipAnimation:fade">
+
+		<h2>Inspiring Themes</h2>
+
+		<br>
+		<p class='joyride-info'>Every other Friday, we try to feature a new theme which will uplift our spirituality. Our themes mostly focus on the universal values such as <i>compassion</i>, <i>patience</i>, <i>love</i> and so on. <p class='joyride-info'>We feature each theme with a beautiful image. <i>Click on these beautiful images & start exploring the theme/value behind it. </i> </p>
+		</li>
+
+
+</ol>
+
+<hr>
+
+
+
+
+
+
+<!--blp_get_the_bottom_line is running-->
+
+
+
+<style>
+.menu-icon-2{
+	display:none; /* it sets to block or none by ( hacked ) template-includes/sidebar-menu/sidenav.php */
+	cursor:pointer;
+	opacity:1;
+	position:fixed;
+	top:0px;
+	left:0px;
+	z-index:1000000;
+}
+</style>
+<div class="menu-icon-2 sidenav-brand" style='width:350px;'>
+	<a class="menu-icon-2"  href="javascript://" id="sidenav-toggle" >
+		<img class="menu-icon-2" src="/wp-content/themes/plain-child/images/menu.png"  style="top:10px;left:10px">
+	</a>
+  TOPICS MENU
+</div>
+
+
+
+<nav class="sidenav" data-sidenav data-sidenav-toggle="#sidenav-toggle">
+
+		<script src="/wp-content/themes/plain-child/blueprint/template-includes/hamburger.js?ver=Sep-2023plain-child-footer-php-Sep-1-2022"></script>
+
+
+</nav>
+
+
+
+
+<script src="/wp-content/themes/plain-child/blueprint/template-includes/sidebar-menu/sidenav.js?ver=926169912"></script>
+<script>jQuery('[data-sidenav]').sidenav();</script>
+<script type='text/javascript' src='/wp-content/themes/plain-child/blueprint/template-includes/overwriting-scripts.js?ver=may-4-2022-see-dot-org-slash-index-php926169912'></script>
+
+
+
+<script>
+	jQuery( document ).ready(function() {
+		jQuery(".se-pre-con").fadeOut("fast");;
+	});
+</script>
+
+						
+														<!--this section is pretty much the same for asp/php and wordpress BEGIN (static-footer-new.php ) 5445524888-->
+																									<!--222--><!--plain-child/footer.htm-->
+																<!--this section is pretty much the same for asp/php and wordpress END-->
+
+						
+						
+
+</div><!--[toggleOverlay 4of4 : closer of the ___div class="background-content"___ which was opened right after <body>-->
+
+
+
+</body></html><!--Dyn. Page Generation Time: {{~@1700591310.0893@~}} 11/21/2023 10:28:30 AM | Processing Time in MS 2.5740039348602-->
+
+
+
+<!--cachedAge:1700591310.2297-->
+<!--cachedOn: 2023-11-21 18:28:30-->
+<!--cache expired-->
+	<script>
+
+		jQuery(document).ready( function($) {
+			$.ajax({
+				url: "https://www.islamicity.org/wp-content/themes/plain-child/blueprint/cache/set-cache.php?current_page=https://www.islamicity.org/14656/spreading-rumors-and-suspicions/",
+				success: function( data ) {
+
+									
+				}
+
+			});
+		})
+
+	</script>
+
+	
